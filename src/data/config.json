@@ -27,15 +27,44 @@
     "photoJpegQuality": 0.7
   },
   "areas": {
-    "life": { "label": "생활", "icon": "User", "hint": "사람들의 생활은 어떻게 될까요?" },
-    "env": { "label": "환경", "icon": "Leaf", "hint": "동물·식물·자연은 어떻게 될까요?" },
-    "exp": { "label": "실험", "icon": "FlaskConical", "hint": "상자 실험에서 무엇을 보았나요?" },
-    "local": { "label": "우리 지역", "icon": "MapPin", "hint": "우리 지역은 어떻게 변하고 있나요?" }
+    "life": {
+      "label": "생활",
+      "icon": "User",
+      "hint": "사람들의 생활은 어떻게 될까요?"
+    },
+    "env": {
+      "label": "환경",
+      "icon": "Leaf",
+      "hint": "동물·식물·자연은 어떻게 될까요?"
+    },
+    "exp": {
+      "label": "실험",
+      "icon": "FlaskConical",
+      "hint": "상자 실험에서 무엇을 보았나요?"
+    },
+    "local": {
+      "label": "우리 지역",
+      "icon": "MapPin",
+      "hint": "우리 지역은 어떻게 변하고 있나요?"
+    }
   },
   "phenomena": {
     "_설명": "현상은 기온·강수량 두 축으로만 묶는다 (지도서 유의점).",
-    "temperature": { "label": "기온 변화", "examples": ["폭염", "한파"] },
-    "precipitation": { "label": "강수량 변화", "examples": ["홍수", "폭설", "가뭄"] }
+    "temperature": {
+      "label": "기온 변화",
+      "examples": [
+        "폭염",
+        "한파"
+      ]
+    },
+    "precipitation": {
+      "label": "강수량 변화",
+      "examples": [
+        "홍수",
+        "폭설",
+        "가뭄"
+      ]
+    }
   },
   "unlock": {
     "write": {
@@ -59,8 +88,90 @@
     "noteAdded": "근거 노트에 담았어요.",
     "noteReplaced": "근거 노트의 내용을 새로 바꿨어요."
   },
+  "ui": {
+    "_설명": "공통 화면 문구 (상단 바, 시작 화면, 메뉴, 근거 노트, 공용 버튼). 컴포넌트에는 한국어 문구를 직접 쓰지 않는다.",
+    "tabs": {
+      "lab": "③ 해수면 실험실",
+      "cards": "④ 영향 탐사 카드",
+      "write": "⑦ 서술 연습"
+    },
+    "start": {
+      "classLabel": "반",
+      "classOption": "{class}반",
+      "classPlaceholder": "반 고르기",
+      "numberLabel": "번호",
+      "nameLabel": "이름",
+      "namePlaceholder": "이름",
+      "startButton": "시작하기",
+      "importToggle": "내 기록 코드로 이어 쓰기",
+      "errors": {
+        "class": "반을 골라 주세요.",
+        "number": "번호를 1~{max} 사이로 써 주세요.",
+        "name": "이름을 {min}~{max}자로 써 주세요."
+      }
+    },
+    "topbar": {
+      "student": "{class}반 {number}번 {name}",
+      "teacher": "교사 시연 모드",
+      "bigText": "큰 글자",
+      "menu": "메뉴"
+    },
+    "menu": {
+      "export": "내 기록 내보내기",
+      "import": "내 기록 불러오기",
+      "switch": "학생 바꾸기",
+      "delete": "이 기기에서 내 기록 지우기",
+      "unsaved": "내보내기 뒤에 바뀐 내용이 있어요"
+    },
+    "export": {
+      "title": "내 기록 코드",
+      "copy": "코드 복사하기",
+      "copied": "코드를 복사했어요. 패들렛에 붙여 넣으세요."
+    },
+    "import": {
+      "title": "내 기록 불러오기",
+      "placeholder": "내 기록 코드를 붙여 넣으세요",
+      "button": "불러오기",
+      "done": "기록을 불러왔어요."
+    },
+    "notes": {
+      "title": "근거 노트",
+      "filterAll": "전체",
+      "empty": "아직 담은 근거가 없어요. 활동을 하며 근거를 모아 보세요.",
+      "collapse": "근거 노트 접기",
+      "expand": "근거 노트 펴기",
+      "remove": "빼기",
+      "removeConfirm": "이 근거를 노트에서 뺄까요?",
+      "more": "더 보기",
+      "less": "줄이기",
+      "sources": {
+        "lab-record": "③ 실험 기록",
+        "lab-summary": "③ 정리",
+        "card": "④ 카드",
+        "local": "④ 우리 지역"
+      }
+    },
+    "locked": {
+      "write": "잠겨 있어요"
+    },
+    "placeholder": "이 화면은 다음 단계(M{milestone})에서 만들어요.",
+    "common": {
+      "confirm": "확인",
+      "cancel": "취소",
+      "close": "닫기",
+      "next": "다음",
+      "prev": "이전"
+    }
+  },
   "bannedWords": {
     "_설명": "앱 화면 문구에 나오면 안 되는 낱말. 빌드 전 자동 검사(todo.md)에 쓴다. 과학적 원인·완화/적응 구분을 다루지 않기 위함.",
-    "words": ["온실", "이산화탄소", "탄소", "메탄", "완화", "적응"]
+    "words": [
+      "온실",
+      "이산화탄소",
+      "탄소",
+      "메탄",
+      "완화",
+      "적응"
+    ]
   }
 }

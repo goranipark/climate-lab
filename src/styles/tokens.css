@@ -1,0 +1,81 @@
+/* 기후변화 탐사 연구소 — 디자인 토큰 */
+:root {
+  /* 바탕·글자 */
+  --c-ink: #000000;
+  --c-ink-soft: #595959;
+  --c-paper: #ffffff;
+  --c-canvas: #dceeff;
+  --c-mute: #e9e9e9;
+  --c-line-soft: #cccccc;
+
+  /* 의미 색: 생활 / 환경 / 실험 */
+  --c-life: #fb4903;
+  --c-life-wash: #ffe4d6;
+  --c-env: #55db9c;
+  --c-env-wash: #dcf7ea;
+  --c-exp: #5c4ade;
+  --c-exp-wash: #e9ccff;
+
+  /* 주의·포커스 */
+  --c-attn: #ffd731;
+  --c-attn-wash: #fff1a8;
+  --c-focus: #5c4ade;
+
+  /* 그림 전용 */
+  --c-water: #4da2ff;
+  --c-water-line: #1d6fd6;
+  --c-land: #e6d3a3;
+  --c-land-dot: #b89d63;
+  --c-acrylic: #f4fbff;
+  --c-trunk: #8a5a2b;
+
+  /* 글자 */
+  --font-base: "Pretendard Variable", Pretendard, "Noto Sans KR", system-ui, sans-serif;
+  --fs-title: 3rem;
+  --fs-heading: 1.75rem;
+  --fs-subheading: 1.25rem;
+  --fs-body: 1rem;
+  --fs-label: 0.9375rem;
+  --fs-caption: 0.8125rem;
+
+  /* 간격 (4px 단위) */
+  --sp-1: 0.25rem;
+  --sp-2: 0.5rem;
+  --sp-3: 0.75rem;
+  --sp-4: 1rem;
+  --sp-6: 1.5rem;
+  --sp-8: 2rem;
+  --sp-12: 3rem;
+
+  /* 모서리 */
+  --r-item: 1rem;     /* 노트 항목, 입력칸 */
+  --r-card: 1.25rem;  /* 카드 */
+  --r-panel: 1.5rem;  /* 큰 판, 크게 보기 카드 */
+  --r-pill: 9999px;   /* 버튼, 탭, 태그 */
+
+  /* 선 */
+  --bw: 1px;
+  --bw-card: 2px;
+
+  /* 크기 */
+  --h-topbar: 3.5rem;
+  --w-note: 20rem;
+  --h-btn: 2.75rem;
+  --h-btn-sm: 2rem;
+}
+
+/* 전자칠판 큰 글자 모드: 루트 크기만 키우고 나머지는 rem으로 따라감 */
+html { font-size: 16px; }
+html[data-size="large"] { font-size: 22px; }
+html[data-size="large"] {
+  --bw: 2px;
+  --bw-card: 3px;
+  --h-btn-sm: 2rem; /* 22px × 2 = 44px */
+}
+
+/* 그림자·그라데이션은 쓰지 않는다 (스타일 원칙). 포커스 고리는 outline으로 그린다 */
+:focus-visible {
+  outline: 3px solid var(--c-focus);
+  outline-offset: 2px;
+}
+html[data-size="large"] :focus-visible { outline-width: 4px; }

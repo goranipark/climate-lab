@@ -1,4 +1,4 @@
-# todo.md — 기후변화 탐사 연구소 구현 순서 (Codex 작업용)
+# todo.md — 기후변화 탐사 연구소 구현 순서
 
 > 근거 문서: concept.md(기능) · design.md(화면) · data.md + `src/data/*.json`(내용)
 > 이 문서의 범위: React(Vite) 정적 사이트 구현 순서, 로컬 실행용 setup 스크립트, Vercel 배포
@@ -25,7 +25,7 @@
 
 > 11/12까지 ③④를 다 못 끝낼 때의 우선순위: ③(1·2·3·5단계) → 근거 노트 → 내보내기/불러오기 → ④ → ③ 4단계(실제 그림). ③ 4단계 그림은 처음에는 단순한 그림으로 배포하고 나중에 다듬어도 된다.
 
-## 1. Codex에게 주는 규칙 (모든 작업 공통)
+## 1. 구현 규칙 (모든 작업 공통)
 
 1. **서버·DB·API 키 없음.** 정적 파일만 만든다. `fetch`로 외부 API를 부르지 않는다. 외부로 나가는 것은 태백 카드의 링크(새 탭) 하나뿐이다.
 2. **저장은 localStorage**, 기기 이동은 내보내기/불러오기 코드(data.md 7장).
@@ -45,7 +45,7 @@
 | 빌드 | Vite 5 + React 18 + TypeScript | plan.md 결정. TypeScript는 json 구조 실수를 빌드 때 잡기 위해 |
 | 상태 | React Context + `useReducer` | 라이브러리 없이. 학생 기록 하나가 상태의 전부 |
 | 화면 이동 | 해시(`#/lab`, `#/cards`, `#/write`) 직접 처리 | 라우터 라이브러리 불필요, 정적 배포에서 새로고침 문제 없음 |
-| 스타일 | 일반 CSS + CSS 변수(design.md 10장) | 빌드 설정 최소화. 컴포넌트별 `*.module.css` |
+| 스타일 | 일반 CSS + CSS 변수(design.md 10장) | 빌드 설정 최소화. `src/styles/`의 tokens·base·app.css + 기능별 css |
 | 아이콘 | `lucide-react` | design.md 6.5 |
 | 글꼴 | `pretendard` npm 패키지(가변 글꼴 woff2를 번들에 포함) | 외부 글꼴 서버 호출 없음 |
 | 압축 | `lz-string` | 내보내기 코드(data.md 7장) |
@@ -104,13 +104,13 @@ climate-lab/
 
 ## 4. 구현 순서
 
-각 항목의 괄호는 참고할 문서 위치다. 체크박스는 Codex가 끝낼 때마다 표시한다.
+각 항목의 괄호는 참고할 문서 위치다. 체크박스는 구현하면서 끝낼 때마다 표시한다.
 
 ### M0. 프로젝트 준비 (11/5)
 
-- [ ] Vite React TS 프로젝트 만들기, 위 폴더 구조로 정리, `index.html`에 `lang="ko"`, 제목 "기후변화 탐사 연구소"
-- [ ] 패키지 설치: `react react-dom lucide-react lz-string pretendard` / 개발용 `typescript vite @vitejs/plugin-react vite-plugin-pwa vitest @testing-library/react @testing-library/jest-dom jsdom playwright qrcode`
-- [ ] `package.json` 스크립트
+- [x] Vite React TS 프로젝트 만들기, 위 폴더 구조로 정리, `index.html`에 `lang="ko"`, 제목 "기후변화 탐사 연구소"
+- [x] 패키지 설치: `react react-dom lucide-react lz-string pretendard` / 개발용 `typescript vite @vitejs/plugin-react vitest @testing-library/react @testing-library/jest-dom jsdom qrcode` (`vite-plugin-pwa`는 M4에서 추가, Playwright는 개발 컴퓨터에 설치된 것을 씀)
+- [x] `package.json` 스크립트
 
   | 이름 | 하는 일 |
   | --- | --- |
@@ -124,30 +124,30 @@ climate-lab/
   | `qr` | `node scripts/make-qr.mjs` |
   | `check` | `check:data` → `check:text` → `test` → `build` 차례로 |
 
-- [ ] `src/types/data.ts`: json 5개의 타입 정의, json을 `import`해서 타입을 맞춘다(구조가 어긋나면 빌드 실패)
-- [ ] `scripts/check-data.mjs`: data.md 10장 1~6번 검사 그대로
-- [ ] `scripts/check-text.mjs`: ① `src/**/*.tsx`에서 json을 거치지 않은 한글 문자열 찾기(주석 제외) ② 금지어가 `src` 전체 문자열에 있는지 검사
-- [ ] `src/styles/tokens.css`(design.md 10장 그대로), `base.css`(Pretendard 불러오기, `word-break: keep-all`, 바탕 `--c-canvas`)
-- [ ] `setup.sh`, `setup.bat` 동작 확인(5장)
+- [x] `src/types/data.ts`: json 5개의 타입 정의, json을 `import`해서 타입을 맞춘다(구조가 어긋나면 빌드 실패)
+- [x] `scripts/check-data.mjs`: data.md 10장 1~6번 검사 그대로
+- [x] `scripts/check-text.mjs`: ① `src/**/*.tsx`에서 json을 거치지 않은 한글 문자열 찾기(주석 제외) ② 금지어가 `src` 전체 문자열에 있는지 검사
+- [x] `src/styles/tokens.css`(design.md 10장 그대로), `base.css`(Pretendard 불러오기, `word-break: keep-all`, 바탕 `--c-canvas`)
+- [x] `setup.sh` 동작 확인(5장) — `setup.bat`은 윈도우에서 첫 실행 때 확인
 
 완료 기준: `./setup.sh`로 빈 화면이 뜨고 `npm run check` 통과.
 
 ### M1. 공통 뼈대 (11/5~11/7) — concept.md 4·6·7장, design.md 2.2·2.3·6.2·7장
 
-- [ ] `types/record.ts`: data.md 7장 학생 기록 구조
-- [ ] `storage.ts`: 반·번호별 키(`config.storage`), 저장은 입력 뒤 1초 모아서(debounce), 용량 초과 시 `messages.storageFull` 안내
-- [ ] `RecordContext` + `reducer`: 기록 바꾸는 동작을 모두 reducer 동작으로(예: `PREDICT_SUBMIT`, `POUR_CUP`, `SET_ROW_STATE`, `ADD_NOTE`, `REMOVE_NOTE` …)
-- [ ] 시작 화면: 반(1~`classCount` + 교사)·번호·이름, 같은 반·번호 기록 확인창, 마지막 학생 미리 채우기
-  - [ ] 주소에 `?class=3`이 있으면 반을 미리 골라 둔다(반별 QR용)
-- [ ] 상단 바: 로고·앱 이름, 탭 3개(pill, 잠금 상태), 학생 정보, `가+` 큰 글자 토글, 메뉴
-- [ ] 해시 이동: `#/lab` `#/cards` `#/write`, 마지막 탭·단계 다시 열기
-- [ ] 탭 잠금(`selectors.ts`): ⑦ = `kind:"card"` 노트 중 life ≥1, env ≥1. 잠긴 탭 누르면 말풍선. 교사 모드는 모두 열림
-- [ ] 근거 노트 패널: 요약 개수, 필터, 항목(영역 색·태그·출처·빼기), 접기/펴기, 새 항목 강조, 같은 `source+sourceRef`는 덮어쓰기
-- [ ] 메뉴: 내보내기(코드 + 복사 + 사진 안내, 미저장 점 ●), 불러오기(확인창·오류), 학생 바꾸기, 이 기기에서 지우기(2번 확인)
-- [ ] `exportCode.ts`: `CL1-` + `lz-string` 압축, 사진 제외, 버전 확인
-- [ ] 큰 글자 모드: `html[data-size="large"]`, 기기 단위 저장(`uiKey`), 큰 글자 모드에서 노트 기본 접힘
-- [ ] 토스트, 안내 줄, 확인창 공용 컴포넌트
-- [ ] 테스트: 저장 키 분리(2반 3번 / 3반 3번), 내보내기→불러오기 왕복, 잠금 조건, 노트 덮어쓰기
+- [x] `types/record.ts`: data.md 7장 학생 기록 구조
+- [x] `storage.ts`: 반·번호별 키(`config.storage`), 저장은 입력 뒤 1초 모아서(debounce), 용량 초과 시 `messages.storageFull` 안내
+- [x] `RecordContext` + `reducer`: 기록 바꾸는 동작을 모두 reducer 동작으로(예: `PREDICT_SUBMIT`, `POUR_CUP`, `SET_ROW_STATE`, `ADD_NOTE`, `REMOVE_NOTE` …)
+- [x] 시작 화면: 반(1~`classCount` + 교사)·번호·이름, 같은 반·번호 기록 확인창, 마지막 학생 미리 채우기
+  - [x] 주소에 `?class=3`이 있으면 반을 미리 골라 둔다(반별 QR용)
+- [x] 상단 바: 로고·앱 이름, 탭 3개(pill, 잠금 상태), 학생 정보, `가+` 큰 글자 토글, 메뉴
+- [x] 해시 이동: `#/lab` `#/cards` `#/write`, 마지막 탭·단계 다시 열기
+- [x] 탭 잠금(`selectors.ts`): ⑦ = `kind:"card"` 노트 중 life ≥1, env ≥1. 잠긴 탭 누르면 말풍선. 교사 모드는 모두 열림
+- [x] 근거 노트 패널: 요약 개수, 필터, 항목(영역 색·태그·출처·빼기), 접기/펴기, 새 항목 강조, 같은 `source+sourceRef`는 덮어쓰기
+- [x] 메뉴: 내보내기(코드 + 복사 + 사진 안내, 미저장 점 ●), 불러오기(확인창·오류), 학생 바꾸기, 이 기기에서 지우기(2번 확인)
+- [x] `exportCode.ts`: `CL1-` + `lz-string` 압축, 사진 제외, 버전 확인
+- [x] 큰 글자 모드: `html[data-size="large"]`, 기기 단위 저장(`uiKey`), 큰 글자 모드에서 노트 기본 접힘
+- [x] 토스트, 안내 줄, 확인창 공용 컴포넌트
+- [x] 테스트: 저장 키 분리(2반 3번 / 3반 3번), 내보내기→불러오기 왕복, 잠금 조건, 노트 덮어쓰기
 
 완료 기준: 학생 두 명을 번갈아 시작해도 기록이 섞이지 않고, 내보내기 코드로 다른 브라우저에서 같은 상태가 복원된다.
 
@@ -364,11 +364,12 @@ npx vercel --prod
 | 화면 검사 | 1366×630 스크롤 없음, 1920×1080 큰 글자 모드 | M4, M6 |
 | 실기기 리허설 | 크롬북 터치·카메라, 전자칠판, 학교 와이파이, 오프라인, 인쇄 | 11/13, 11/27 |
 
-## 8. Codex에게 넘기는 방법
+## 8. 작업 진행 방법
 
-- 마일스톤 하나 = 작업 요청 하나. 요청할 때 "todo.md의 M2를 해 줘. concept.md 5.1, design.md 2.4·5장, data.md 4장을 따라."처럼 문서 위치를 함께 준다.
-- 작업 결과를 받으면 ① `npm run check` 통과 ② 해당 마일스톤 완료 기준 ③ 1장 규칙(특히 하드코딩 문구·한국어 주석)을 확인하고 다음으로 넘어간다.
-- 문서와 다르게 만들어야 할 이유가 생기면, 코드만 바꾸지 말고 해당 문서도 함께 고치게 한다.
+- 구현은 Claude(Opus)가 이 저장소에서 직접 한다(11/4 결정, 처음 계획은 Codex였음).
+- 마일스톤 하나 = 작업 브랜치 하나(`build/m0-m1`, `build/m2` …). 끝나면 GitHub에 올리고, 1366×630 화면 스크린샷과 함께 확인을 받은 뒤 `main`에 합친다.
+- 작업 결과 확인: ① `npm run check` 통과 ② 해당 마일스톤 완료 기준 ③ 1장 규칙(특히 하드코딩 문구·한국어 주석).
+- 문서와 다르게 만들어야 할 이유가 생기면, 코드만 바꾸지 않고 해당 문서도 함께 고친다.
 
 ## 9. 수업 피드백 (리허설·4~5차시에 채우기)
 

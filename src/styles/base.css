@@ -1,0 +1,31 @@
+/* 기본 스타일: 글꼴, 한글 줄바꿈, 바탕색, 공용 글자 크기 */
+*, *::before, *::after { box-sizing: border-box; }
+
+html, body, #root { height: 100%; }
+
+body {
+  margin: 0;
+  font-family: var(--font-base);
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--c-ink);
+  background: var(--c-canvas);
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+  font-variant-numeric: tabular-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, p { margin: 0; }
+button, input, select, textarea { font: inherit; color: inherit; }
+button { cursor: pointer; }
+svg { flex-shrink: 0; }
+
+.heading { font-size: var(--fs-heading); font-weight: 800; line-height: 1.25; }
+.subheading { font-size: var(--fs-subheading); font-weight: 700; line-height: 1.35; }
+.caption { font-size: var(--fs-caption); color: var(--c-ink-soft); line-height: 1.5; }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}

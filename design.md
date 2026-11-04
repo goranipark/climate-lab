@@ -428,7 +428,7 @@ viewBox `0 0 600 340`. 아래 좌표는 이 상자 기준.
 - [ ] `prefers-reduced-motion`에서 움직임이 꺼진다
 - [ ] `<html lang="ko">`
 
-## 10. CSS 토큰 (Codex용)
+## 10. CSS 토큰 (구현용, `src/styles/tokens.css`)
 
 ```css
 /* 기후변화 탐사 연구소 — 디자인 토큰 */
