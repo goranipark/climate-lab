@@ -1,0 +1,295 @@
+{
+  "_설명": "③ 해수면 실험실 내용. 모형실험은 앱의 디지털 수조에서 직접 한다(11/4 결정). 모형·상태·예측·디지털 실험·결과 비교·모형→실제·정리 단계의 문구와 값. simulation.levels의 상태는 design.md 5.2 표와 반드시 같아야 한다.",
+  "notice": "물은 바닷물, 자갈은 육지예요.",
+  "models": [
+    {
+      "id": "island",
+      "label": "섬"
+    },
+    {
+      "id": "house",
+      "label": "집"
+    },
+    {
+      "id": "tree",
+      "label": "나무"
+    }
+  ],
+  "states": [
+    {
+      "id": "none",
+      "label": "그대로",
+      "predictLabel": "그대로일 것 같다"
+    },
+    {
+      "id": "partial",
+      "label": "일부 잠김",
+      "predictLabel": "일부 잠길 것 같다"
+    },
+    {
+      "id": "full",
+      "label": "모두 잠김",
+      "predictLabel": "모두 잠길 것 같다"
+    }
+  ],
+  "steps": [
+    {
+      "id": "predict",
+      "label": "예측",
+      "title": "물을 부으면 어떻게 될까?"
+    },
+    {
+      "id": "experiment",
+      "label": "디지털 실험",
+      "title": "직접 부어 보고 기록해요"
+    },
+    {
+      "id": "compare",
+      "label": "결과 비교",
+      "title": "예측과 결과를 비교해요"
+    },
+    {
+      "id": "real",
+      "label": "모형 → 실제",
+      "title": "실제로는 어디가 잠길까?"
+    },
+    {
+      "id": "summary",
+      "label": "정리",
+      "title": "알게 된 것을 정리해요"
+    }
+  ],
+  "predict": {
+    "question": "수조에 물을 부으면 섬·집·나무 모형은 어떻게 될까?",
+    "reasonLabel": "내 생각의 까닭",
+    "reasonPlaceholder": "예: 섬이 바다 쪽에 낮게 있어서",
+    "reasonMinLength": 5,
+    "submitLabel": "예측 제출",
+    "lockedNotice": "예측은 제출하면 고칠 수 없어요. 실험한 뒤 비교해 봐요."
+  },
+  "experiment": {
+    "_설명": "실험관찰 57쪽 표와 같은 틀로 디지털 수조에서 직접 실험하고 기록한다. 높이(cm)를 쓰는 칸은 두지 않는다.",
+    "guide": {
+      "observeBefore": "물을 붓기 전에 섬·집·나무를 눌러 살펴보세요.",
+      "pour": "컵을 수조 위로 끌어다 놓거나 '컵 붓기'를 눌러 물을 부어 보세요.",
+      "observe": "섬·집·나무를 눌러 가까이 보고, 어떻게 되었는지 살펴보세요.",
+      "record": "컵 {cup}잔 기록을 채워 보세요.",
+      "done": "컵 3잔까지 모두 기록했어요. 결과를 비교해 봐요."
+    },
+    "rows": [
+      {
+        "cup": 1,
+        "label": "컵 1잔"
+      },
+      {
+        "cup": 2,
+        "label": "컵 2잔"
+      },
+      {
+        "cup": 3,
+        "label": "컵 3잔"
+      }
+    ],
+    "columns": [
+      "island",
+      "house",
+      "tree"
+    ],
+    "observationLabel": "이때 본 것",
+    "observationPlaceholder": "무엇이 잠겼나요? 누가 피해를 볼까요?",
+    "noteTemplate": "모형실험 컵 {cup}잔: {observation}",
+    "closeUp": {
+      "label": "가까이 보기",
+      "scale": 2.5,
+      "closeLabel": "닫기"
+    },
+    "pourLabel": "컵 붓기",
+    "pourLocked": "이번 잔 기록을 먼저 채워요.",
+    "dropHint": "여기에 놓아요",
+    "resetLabel": "처음부터 다시 하기",
+    "resetConfirm": "기록은 그대로 두고 물만 비울까요?",
+    "mismatchHint": "다시 살펴볼까요?",
+    "finishLabel": "결과 비교하기"
+  },
+  "simulation": {
+    "_설명": "water는 수조 안쪽 높이에 대한 물 높이 비율, dryLand는 '물에 닿지 않는 육지' 막대 길이 비율. 둘 다 그림용 값이며 화면에 숫자로 표시하지 않는다. 디지털 실험(2단계)과 다시 보기(3단계)가 함께 쓴다.",
+    "dryLandLabel": "물에 닿지 않는 육지",
+    "levels": [
+      {
+        "cup": 0,
+        "water": 0.12,
+        "dryLand": 1.0,
+        "states": {
+          "island": "none",
+          "house": "none",
+          "tree": "none"
+        },
+        "bubble": "컵을 끌어다 수조에 부어 보세요."
+      },
+      {
+        "cup": 1,
+        "water": 0.3,
+        "dryLand": 0.78,
+        "states": {
+          "island": "partial",
+          "house": "none",
+          "tree": "none"
+        },
+        "bubble": "지금 무엇이 잠겼나요? 섬에 사는 생물은 어떻게 될까요?"
+      },
+      {
+        "cup": 2,
+        "water": 0.48,
+        "dryLand": 0.52,
+        "states": {
+          "island": "full",
+          "house": "partial",
+          "tree": "none"
+        },
+        "bubble": "집까지 물이 왔어요. 누가 피해를 볼까요?"
+      },
+      {
+        "cup": 3,
+        "water": 0.66,
+        "dryLand": 0.28,
+        "states": {
+          "island": "full",
+          "house": "full",
+          "tree": "partial"
+        },
+        "bubble": "물에 닿지 않는 육지가 얼마나 남았나요? 사람과 생물은 어디로 가야 할까요?"
+      }
+    ],
+    "changeSticker": {
+      "partial": "일부 잠겼어요",
+      "full": "모두 잠겼어요"
+    },
+    "liveTemplate": "컵 {cup}잔: {changes}"
+  },
+  "compare": {
+    "title": "내 예측과 실험 결과",
+    "predictLabel": "내 예측",
+    "resultLabel": "컵 3잔 뒤 내 기록",
+    "question": "예측과 결과가 같았나요?",
+    "options": [
+      {
+        "id": "same",
+        "label": "같았어요"
+      },
+      {
+        "id": "different",
+        "label": "조금 달랐어요"
+      }
+    ],
+    "diffLabel": "예측과 달랐던 점 (선택)",
+    "diffPlaceholder": "예: 집은 안 잠길 줄 알았는데 컵 2잔에서 잠기기 시작했다.",
+    "replayLabel": "다시 보기",
+    "classroom": {
+      "checkLabel": "아크릴 상자로도 실험했어요 (선택)",
+      "photoLabel": "실험 사진 붙이기 (1장)",
+      "photoNotice": "사진은 이 기기에만 저장돼요.",
+      "memoLabel": "교실 실험에서 본 것",
+      "memoPlaceholder": "예: 디지털 수조처럼 섬이 먼저 잠겼다."
+    }
+  },
+  "real": {
+    "toggle": {
+      "model": "모형",
+      "real": "실제"
+    },
+    "imageLabel": "상상해 본 모습",
+    "whatLabel": "무엇이 잠기나요?",
+    "whoLabel": "누가 피해를 보나요?",
+    "scenes": [
+      {
+        "id": "tuvalu",
+        "title": "투발루",
+        "image": "",
+        "imageAlt": "낮고 평평한 섬의 길과 집 아래쪽까지 바닷물이 들어온 모습을 상상해 그린 그림",
+        "what": "낮은 섬의 길과 집, 밭",
+        "who": "섬에 사는 사람들이 집과 밭을 잃어요.",
+        "whoArea": "life",
+        "factIds": [
+          "tuvalu"
+        ]
+      },
+      {
+        "id": "maldives",
+        "title": "몰디브",
+        "image": "",
+        "imageAlt": "작은 섬 여러 개의 바닷가 마을과 선착장 일부가 잠긴 모습을 상상해 그린 그림",
+        "what": "작은 섬의 바닷가 마을과 선착장",
+        "who": "섬마을 사람들이 살 곳과 배를 대는 곳을 잃어요.",
+        "whoArea": "life",
+        "factIds": [
+          "maldives"
+        ]
+      },
+      {
+        "id": "tidal-flat",
+        "title": "갯벌",
+        "image": "",
+        "imageAlt": "넓은 갯벌 대부분이 바닷물에 덮여 게와 조개, 새가 쉴 곳이 줄어든 모습을 상상해 그린 그림",
+        "what": "넓은 갯벌",
+        "who": "갯벌에 사는 게와 조개, 그것을 먹는 새가 살 곳을 잃어요.",
+        "whoArea": "env",
+        "factIds": []
+      }
+    ],
+    "commonFactIds": [
+      "sea-level-rate",
+      "sea-level-2100"
+    ]
+  },
+  "facts": [
+    {
+      "id": "sea-level-rate",
+      "text": "해수면이 높아지는 빠르기가 1991~2000년에는 한 해에 3.80 mm였는데, 2011~2020년에는 한 해에 4.27 mm가 되었어요. 약 10% 빨라졌어요.",
+      "sourceIds": [
+        "khoa"
+      ]
+    },
+    {
+      "id": "sea-level-2100",
+      "text": "가장 나쁜 경우를 생각하면, 2100년에는 해수면이 0.63~1.01 m 높아질 수 있어요. 그래서 지금 우리가 할 수 있는 일을 찾는 것이 중요해요.",
+      "sourceIds": [
+        "ipcc-ar6"
+      ]
+    },
+    {
+      "id": "tuvalu",
+      "text": "투발루는 땅의 평균 높이가 약 2 m예요. 섬 2개가 물에 잠겼어요.",
+      "sourceIds": [
+        "guide-357"
+      ]
+    },
+    {
+      "id": "maldives",
+      "text": "몰디브는 약 1,200개의 섬으로 이루어져 있고, 땅의 평균 높이가 약 1 m예요.",
+      "sourceIds": [
+        "guide-357"
+      ]
+    }
+  ],
+  "summary": {
+    "prefix": "해수면이 상승하면",
+    "minLength": 10,
+    "sentences": [
+      {
+        "id": "s1",
+        "area": "life",
+        "hint": "사람들의 생활은 어떻게 될까요?",
+        "placeholder": "예: 바닷가 낮은 곳에 사는 사람들이 …"
+      },
+      {
+        "id": "s2",
+        "area": "env",
+        "hint": "동물·식물·자연은 어떻게 될까요?",
+        "placeholder": "예: 갯벌에 사는 생물들이 …"
+      }
+    ],
+    "saveLabel": "근거 노트에 담기",
+    "noteTemplate": "해수면이 상승하면 {text}",
+    "closing": "무엇이 잠기는지 알았으니, 이제 우리가 할 수 있는 일도 찾아볼 수 있어요."
+  }
+}

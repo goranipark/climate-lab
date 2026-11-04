@@ -1,0 +1,66 @@
+{
+  "_설명": "앱 전체 설정. 반 수, 저장 키, 잠금 조건, 영역 이름, 공통 문구를 여기서 바꾼다.",
+  "app": {
+    "name": "기후변화 탐사 연구소",
+    "unit": "4학년 과학 4. 기후변화와 우리 생활",
+    "dataVersion": 1
+  },
+  "student": {
+    "classCount": 6,
+    "maxNumber": 35,
+    "nameMinLength": 2,
+    "nameMaxLength": 10,
+    "teacherOption": {
+      "enabled": true,
+      "label": "교사 (시연 모드)"
+    }
+  },
+  "storage": {
+    "prefix": "climate-lab:v1",
+    "studentKey": "{prefix}:{class}-{number}",
+    "photoKey": "{prefix}:{class}-{number}:photo",
+    "lastKey": "{prefix}:last",
+    "uiKey": "{prefix}:ui",
+    "teacherKey": "{prefix}:teacher",
+    "exportCodePrefix": "CL1-",
+    "photoMaxSide": 800,
+    "photoJpegQuality": 0.7
+  },
+  "areas": {
+    "life": { "label": "생활", "icon": "User", "hint": "사람들의 생활은 어떻게 될까요?" },
+    "env": { "label": "환경", "icon": "Leaf", "hint": "동물·식물·자연은 어떻게 될까요?" },
+    "exp": { "label": "실험", "icon": "FlaskConical", "hint": "상자 실험에서 무엇을 보았나요?" },
+    "local": { "label": "우리 지역", "icon": "MapPin", "hint": "우리 지역은 어떻게 변하고 있나요?" }
+  },
+  "phenomena": {
+    "_설명": "현상은 기온·강수량 두 축으로만 묶는다 (지도서 유의점).",
+    "temperature": { "label": "기온 변화", "examples": ["폭염", "한파"] },
+    "precipitation": { "label": "강수량 변화", "examples": ["홍수", "폭설", "가뭄"] }
+  },
+  "unlock": {
+    "write": {
+      "lifeCards": 1,
+      "envCards": 1,
+      "countLocalCard": false,
+      "lockedMessage": "④ 영향 탐사 카드에서 생활 카드와 환경 카드를 한 장씩 담으면 열려요.",
+      "unlockedToast": "⑦ 서술 연습이 열렸어요! 근거를 더 담을수록 글이 탄탄해져요.",
+      "relockedNotice": "근거 카드가 부족해요. ④에서 생활 카드와 환경 카드를 한 장씩 담아 주세요. 지금까지 쓴 글은 그대로 있어요."
+    }
+  },
+  "messages": {
+    "existingRecord": "{class}반 {number}번 기록이 이미 있어요. 이어서 쓸까요?",
+    "exportGuide": "이 코드를 패들렛 내 칸에 붙여 두세요. 다른 기기에서 이어 쓸 때 필요해요.",
+    "exportPhotoNotice": "사진은 코드에 들어가지 않아요. 사진은 이 기기에만 저장돼요.",
+    "importConfirm": "{class}반 {number}번 {name}의 기록으로 이어 쓸까요? 이 기기에 있던 같은 번호 기록은 바뀌어요.",
+    "importError": "코드가 올바르지 않아요. 처음부터 끝까지 빠짐없이 복사했는지 확인해 주세요.",
+    "storageFull": "저장 공간이 가득 찼어요. 사진을 지우거나 내 기록을 내보내 주세요.",
+    "deleteConfirm1": "이 기기에서 {class}반 {number}번 기록을 지울까요?",
+    "deleteConfirm2": "정말 지울까요? 내보내기 코드가 없으면 되살릴 수 없어요.",
+    "noteAdded": "근거 노트에 담았어요.",
+    "noteReplaced": "근거 노트의 내용을 새로 바꿨어요."
+  },
+  "bannedWords": {
+    "_설명": "앱 화면 문구에 나오면 안 되는 낱말. 빌드 전 자동 검사(todo.md)에 쓴다. 과학적 원인·완화/적응 구분을 다루지 않기 위함.",
+    "words": ["온실", "이산화탄소", "탄소", "메탄", "완화", "적응"]
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "_설명": "⑦ 서술 연습. 서술 틀, 칸, 자기 점검 3항목, 출력 문구. 자기 점검은 점수 없이 빠진 항목만 알린다. 평가 기준(영향 3가지=상, 2가지=중, 1가지 이하=하)을 화면에 점수로 보여 주지 않는다.",
+  "title": "근거를 들어 써 봐요",
+  "guide": "가져온 문장은 내 말로 고쳐 써요. 밑줄이 남은 부분이 아직 안 고친 부분이에요.",
+  "noLabNotice": "③ 해수면 실험실의 정리 문장을 쓰면 실험 근거로 쓸 수 있어요.",
+  "frame": [
+    { "type": "text", "text": "기후변화로 해수면이 상승하면" },
+    { "type": "field", "fieldId": "life" },
+    { "type": "text", "text": "또" },
+    { "type": "field", "fieldId": "env" },
+    { "type": "text", "text": "그 근거는" },
+    { "type": "field", "fieldId": "exp" }
+  ],
+  "fields": [
+    {
+      "id": "life",
+      "area": "life",
+      "label": "생활 영향",
+      "placeholder": "사람들의 생활은 어떻게 될까요?",
+      "suggestFrom": { "areas": ["life", "local"] },
+      "required": true
+    },
+    {
+      "id": "env",
+      "area": "env",
+      "label": "환경 영향",
+      "placeholder": "동물·식물·자연은 어떻게 될까요?",
+      "suggestFrom": { "areas": ["env"] },
+      "required": true
+    },
+    {
+      "id": "exp",
+      "area": "exp",
+      "label": "실험 근거",
+      "placeholder": "상자 실험에서 무엇을 보았나요?",
+      "suggestFrom": { "kinds": ["experiment"] },
+      "required": true
+    },
+    {
+      "id": "extra",
+      "area": null,
+      "label": "더 써 보기 (선택)",
+      "placeholder": "다른 영향도 있나요?",
+      "prefix": "그리고",
+      "suggestFrom": { "areas": ["life", "env", "local"], "kinds": ["experiment"] },
+      "required": false
+    }
+  ],
+  "compose": {
+    "_설명": "완성 글 만들기 규칙: 각 칸의 앞뒤 공백을 지우고, 끝의 마침표·느낌표·물음표를 하나 지운 뒤 '.'을 붙인다. 빈 칸은 그 문장째 뺀다. extra가 있으면 prefix를 붙여 맨 뒤에 잇는다.",
+    "sentenceTemplates": {
+      "life": "기후변화로 해수면이 상승하면 {text}.",
+      "env": "또 {text}.",
+      "exp": "그 근거는 {text}.",
+      "extra": "그리고 {text}."
+    },
+    "joiner": " "
+  },
+  "selfCheck": {
+    "buttonLabel": "점검하기",
+    "items": [
+      {
+        "id": "has-life",
+        "fieldId": "life",
+        "area": "life",
+        "label": "생활 영향",
+        "minLength": 10,
+        "okText": "들어 있어요",
+        "missingText": "사람들의 생활이 어떻게 되는지 써 보세요."
+      },
+      {
+        "id": "has-env",
+        "fieldId": "env",
+        "area": "env",
+        "label": "환경 영향",
+        "minLength": 10,
+        "okText": "들어 있어요",
+        "missingText": "동물·식물·자연이 어떻게 되는지 써 보세요."
+      },
+      {
+        "id": "has-exp",
+        "fieldId": "exp",
+        "area": "exp",
+        "label": "실험 근거",
+        "minLength": 10,
+        "okText": "들어 있어요",
+        "missingText": "상자 실험에서 본 것을 근거로 써 보세요."
+      }
+    ],
+    "allOkText": "세 가지가 다 들어 있어요. 영향을 하나 더 쓰면 더 구체적인 글이 돼요.",
+    "allOkWithExtraText": "세 가지가 다 들어 있고, 다른 영향도 더 썼어요. 내 말로 쓴 근거가 있는 글이에요.",
+    "unchangedImportText": "가져온 문장을 아직 그대로 쓴 곳이 있어요."
+  },
+  "output": {
+    "printLabel": "인쇄하기",
+    "copyLabel": "글 복사하기",
+    "copiedToast": "글을 복사했어요. 패들렛에 붙여 넣으세요.",
+    "printHeader": "기후변화와 우리 생활 · 서술 연습",
+    "copyTemplate": "{class}반 {number}번 {name}\n{text}",
+    "printTooLong": "글이 길어서 2쪽이 돼요."
+  },
+  "teacherExample": {
+    "_설명": "교사 시연 모드에서만 '예시 글 보기'로 보여 준다. 학생 화면에는 나오지 않는다.",
+    "life": "바닷가 낮은 땅에 사는 사람들이 집과 밭을 잃게 돼요",
+    "env": "갯벌이 바닷물에 잠겨 게와 조개, 새가 살 곳이 줄어들어요",
+    "exp": "상자 실험에서 컵을 부을수록 섬, 집, 나무 순서로 물에 잠기고 물에 닿지 않는 육지가 줄어든 것이에요",
+    "extra": "폭염이 길어지면 밖에서 일하는 사람들이 열사병에 걸리기 쉬워요"
+  },
+  "closing": "근거를 들어 쓴 글은 다른 사람을 설득하는 힘이 있어요. 우리 반의 실천으로 이어 가 봐요."
+}
