@@ -1,6 +1,6 @@
 // 데이터(json) 검사 스크립트 — data.md 10장의 검사 1~6번
 // 사용법: npm run check:data
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
 
@@ -89,6 +89,18 @@ for (const sc of lab.real.scenes) for (const fid of sc.factIds) if (!lab.facts.s
 const fieldIds = new Set(writing.fields.map((f) => f.id));
 if (writing.selfCheck.items.length !== 3) fail('자기 점검 항목은 3개여야 해요');
 for (const it of writing.selfCheck.items) if (!fieldIds.has(it.fieldId)) fail(`자기 점검 ${it.id}: 없는 칸 id "${it.fieldId}"`);
+
+// 그림 경로: 적었으면 public/ 아래에 파일이 있어야 하고, 맨 앞 '/' 없이 쓴다
+const images = [
+  ...cards.cards.map((c) => [`cards.json ${c.id}`, c.image]),
+  [`cards.json localCard`, cards.localCard.image],
+  ...lab.real.scenes.map((sc) => [`lab.json ${sc.id}`, sc.image]),
+];
+for (const [where, img] of images) {
+  if (!img) continue;
+  if (img.startsWith('/')) fail(`${where}: image 경로는 맨 앞 '/' 없이 적어요 (${img})`);
+  else if (!existsSync(join(root, 'public', img))) fail(`${where}: public/${img} 파일이 없어요`);
+}
 
 // 6. 수치 허용 목록 (data.md 2장 표 + 쪽수·컵 수 같은 화면 숫자)
 const ALLOWED = new Set([

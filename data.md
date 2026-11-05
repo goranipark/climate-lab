@@ -20,7 +20,7 @@
 - 각 파일 맨 위 `"_설명"`처럼 **밑줄(_)로 시작하는 키는 설명용**이다. 앱은 읽지 않는다.
 - 화면 문구에 `{class}`, `{cup}`, `{text}`처럼 중괄호가 있으면 앱이 값을 끼워 넣는 자리다. 지우지 않는다.
 - 영역 값은 영어 id로 쓴다: `life`(생활), `env`(환경), `exp`(실험), `local`(우리 지역). 화면 이름은 `config.json`의 `areas`에서 가져온다.
-- `image`가 빈 문자열(`""`)이면 앱에 들어 있는 SVG 그림을 쓴다. `public/images/…` 경로를 넣으면 그 그림으로 바뀐다(design.md 5장).
+- `image`가 빈 문자열(`""`)이면 앱이 단순한 기본 그림을 보여 준다. `"images/cards/bee.svg"`처럼 경로(맨 앞 `/` 없이)를 넣으면 `public/` 아래의 그 그림을 쓴다. 정지 그림은 Codex가 `docs/asset-requests.md` 주문서대로 만든다(design.md 5장).
 
 ## 2. 수치·출처 점검
 
@@ -328,7 +328,7 @@ design.md 5.2의 표와 같다. 수조 그림을 고치면 이 표도 같이 고
 | 반 수 | `config.json` → `student.classCount` |
 | 카드의 최근 사례 | `cards.json` → 해당 카드의 `recentExample`, `recentSourceText` (둘 다 채우기) |
 | 카드 문장 | `cards.json` → `question`, `what`, `who` (`id`는 바꾸지 않기) |
-| 카드 그림 | 그림 파일을 `public/images/`에 넣고 `image`에 `"/images/파일이름.png"` |
+| 카드 그림 | 그림 파일을 `public/images/cards/`에 넣고 `image`에 `"images/cards/파일이름.svg"` (맨 앞 `/` 없이) |
 | 디지털 수조 말풍선 질문 | `lab.json` → `simulation.levels[].bubble` |
 | 자기 점검 문구 | `writing.json` → `selfCheck.items[].missingText` |
 | 기후정보포털 주소 | `cards.json` → `localCard.url` |

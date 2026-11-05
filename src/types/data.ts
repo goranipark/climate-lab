@@ -251,6 +251,7 @@ export interface CardsData {
     inputMinLength: number;
     noteTemplate: string;
     sourceIds: string[];
+    image: string;
     imageAlt: string;
   };
   closing: string;

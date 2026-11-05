@@ -10,6 +10,9 @@ import { TopBar, type MenuAction } from './components/TopBar';
 import { ExportDialog, ImportDialog } from './components/RecordDialogs';
 import { StartScreen } from './features/start/StartScreen';
 import { NotesPanel } from './features/notes/NotesPanel';
+import { LabTab } from './features/lab/LabTab';
+import { CardsTab } from './features/cards/CardsTab';
+import { WriteTab } from './features/write/WriteTab';
 import { RecordProvider, useRecord } from './store/RecordContext';
 import { collectedCardCounts, isTeacher, isWriteUnlocked } from './store/selectors';
 import { deleteRecord, loadUiPrefs, saveRecord, saveUiPrefs } from './store/storage';
@@ -127,7 +130,7 @@ function Main({ large, onToggleLarge, onSignOut, onReplace }: MainProps) {
   );
 }
 
-/** 탭 본문. M2(③)·M3(④)·M5(⑦)에서 실제 화면으로 바뀐다 */
+/** 탭 본문. 각 탭 화면은 features 폴더의 LabTab·CardsTab·WriteTab에서 만든다 */
 function TabContent({ tab }: { tab: TabId }) {
   const { record } = useRecord();
   if (tab === 'write' && !isWriteUnlocked(record)) {
@@ -140,11 +143,7 @@ function TabContent({ tab }: { tab: TabId }) {
       </section>
     );
   }
-  const milestone = { lab: 2, cards: 3, write: 5 }[tab];
-  return (
-    <section className="panel panel-center">
-      <h1 className="heading">{config.ui.tabs[tab]}</h1>
-      <p>{fill(config.ui.placeholder, { milestone })}</p>
-    </section>
-  );
+  if (tab === 'lab') return <LabTab />;
+  if (tab === 'cards') return <CardsTab />;
+  return <WriteTab />;
 }

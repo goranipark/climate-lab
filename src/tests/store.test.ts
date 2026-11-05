@@ -119,3 +119,20 @@ describe('미저장 표시', () => {
     expect(hasUnexported(r)).toBe(true);
   });
 });
+
+describe('화면별 동작 나눠 보내기', () => {
+  it('CARDS_FLIP은 뒷면 본 카드를 한 번만 기록한다', () => {
+    let r = createEmptyRecord(s23);
+    r = reducer(r, { type: 'CARDS_FLIP', cardId: 'bee' });
+    r = reducer(r, { type: 'CARDS_FLIP', cardId: 'bee' });
+    expect(r.cards.flipped).toEqual(['bee']);
+  });
+
+  it('LAB_RESET_WATER는 물만 비우고 기록은 둔다', () => {
+    let r = createEmptyRecord(s23);
+    r = { ...r, lab: { ...r.lab, experiment: { ...r.lab.experiment, cupsPoured: 2, rows: { ...r.lab.experiment.rows, '1': { island: 'partial', house: 'none', tree: 'none', observation: 'x' } } } } };
+    r = reducer(r, { type: 'LAB_RESET_WATER' });
+    expect(r.lab.experiment.cupsPoured).toBe(0);
+    expect(r.lab.experiment.rows['1'].observation).toBe('x');
+  });
+});
