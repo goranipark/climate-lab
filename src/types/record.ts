@@ -54,6 +54,13 @@ export interface StudentRecord {
     localText: string;
   };
   notes: Note[];
+  /** 게임 요소: 고른 연구 동료, 이미 알려 준 배지, 이미 본 미션 브리핑 */
+  game: {
+    avatar: string | null;
+    issuedAt: string | null;
+    badgesSeen: string[];
+    briefed: string[];
+  };
   writing: {
     fields: { life: string; env: string; exp: string; extra: string };
     imports: Record<string, { start: number; end: number; noteId: string }[]>;
@@ -83,6 +90,7 @@ export function createEmptyRecord(student: Student, now = new Date().toISOString
     },
     cards: { flipped: [], myNotes: {}, localText: '' },
     notes: [],
+    game: { avatar: null, issuedAt: null, badgesSeen: [], briefed: [] },
     writing: { fields: { life: '', env: '', exp: '', extra: '' }, imports: {}, lastCheck: null },
   };
 }

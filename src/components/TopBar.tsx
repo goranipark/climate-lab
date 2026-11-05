@@ -1,10 +1,13 @@
 // 상단 바: 로고·앱 이름 / 탭 3개 / 학생 정보·큰 글자·메뉴 (design.md 2.2)
 import { useEffect, useRef, useState } from 'react';
-import { Lock, Menu as MenuIcon, Type } from 'lucide-react';
+import { Award, Lock, Menu as MenuIcon, Type } from 'lucide-react';
 import { config, type TabId } from '../types/data';
 import { fill } from '../lib/template';
 import { useRecord } from '../store/RecordContext';
 import { hasUnexported, isTeacher, isWriteUnlocked } from '../store/selectors';
+import { game } from '../types/data';
+import { GameSticker } from '../features/game/GameIcon';
+import { earnedBadges } from '../features/game/badges';
 
 const TABS: TabId[] = ['lab', 'cards', 'write'];
 const U = config.ui;
@@ -17,9 +20,10 @@ interface Props {
   large: boolean;
   onToggleLarge: () => void;
   onMenu: (action: MenuAction) => void;
+  onResearcher: () => void;
 }
 
-export function TopBar({ tab, onTab, large, onToggleLarge, onMenu }: Props) {
+export function TopBar({ tab, onTab, large, onToggleLarge, onMenu, onResearcher }: Props) {
   const { record } = useRecord();
   const [lockTip, setLockTip] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
@@ -94,9 +98,17 @@ export function TopBar({ tab, onTab, large, onToggleLarge, onMenu }: Props) {
       </nav>
 
       <div className="topbar-right">
-        <span className="student-chip">
-          {isTeacher(record) ? U.topbar.teacher : fill(U.topbar.student, { class: s.class, number: s.number, name: s.name })}
-        </span>
+        {isTeacher(record) ? (
+          <span className="student-chip">{U.topbar.teacher}</span>
+        ) : (
+          <button type="button" className="researcher-btn" onClick={onResearcher} title={game.ui.openCard} aria-label={game.ui.openCard}>
+            <ResearcherAvatar avatarId={record.game.avatar} />
+            {fill(U.topbar.student, { class: s.class, number: s.number, name: s.name })}
+            <span className="researcher-count">
+              <Award aria-hidden size={14} /> {earnedBadges(record).length}
+            </span>
+          </button>
+        )}
         <button
           type="button"
           className={`btn btn-ghost btn-sm ${large ? 'btn-on' : ''}`}
@@ -138,4 +150,10 @@ export function TopBar({ tab, onTab, large, onToggleLarge, onMenu }: Props) {
       </div>
     </header>
   );
+}
+
+/** 상단 바의 작은 연구 동료 스티커 */
+function ResearcherAvatar({ avatarId }: { avatarId: string | null }) {
+  const a = game.avatars.find((x) => x.id === avatarId) ?? game.avatars[0];
+  return <GameSticker icon={a.icon} color={a.color} size={1.75} />;
 }

@@ -194,6 +194,7 @@ select.input { padding-right: var(--sp-2); }
 .modal:focus { outline: none; }
 .modal-small { max-width: 26rem; }
 .modal-medium { max-width: 36rem; }
+.modal-wide { max-width: 60rem; }
 .modal-head { display: flex; align-items: center; justify-content: space-between; }
 .modal-title { font-size: var(--fs-subheading); font-weight: 800; }
 .modal-text { font-size: var(--fs-body); }

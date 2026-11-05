@@ -5,6 +5,7 @@ import type { LabStepId, Note, StudentRecord } from '../types/record';
 import { cardsReducer, type CardsAction } from './slices/cards';
 import { labReducer, type LabAction } from './slices/lab';
 import { writeReducer, type WriteAction } from './slices/write';
+import { gameReducer, type GameAction } from './slices/game';
 
 /** 노트 id는 출처+출처 위치로 정해서, 같은 곳에서 다시 담으면 덮어쓰게 한다 */
 export function noteId(source: Note['source'], sourceRef: string): string {
@@ -21,7 +22,7 @@ export type CoreAction =
   | { type: 'REMOVE_NOTE'; id: string }
   | { type: 'MARK_EXPORTED'; now?: string };
 
-export type Action = CoreAction | LabAction | CardsAction | WriteAction;
+export type Action = CoreAction | LabAction | CardsAction | WriteAction | GameAction;
 
 /** 내용이 바뀐 시각을 기록한다 (화면 위치 같은 ui 변화는 제외) */
 function touch(r: StudentRecord, now = new Date().toISOString()): StudentRecord {
@@ -33,6 +34,7 @@ export function reducer(state: StudentRecord, action: Action): StudentRecord {
   if (action.type.startsWith('LAB_')) return labReducer(state, action as LabAction);
   if (action.type.startsWith('CARDS_')) return cardsReducer(state, action as CardsAction);
   if (action.type.startsWith('WRITE_')) return writeReducer(state, action as WriteAction);
+  if (action.type.startsWith('GAME_')) return gameReducer(state, action as GameAction);
   return coreReducer(state, action as CoreAction);
 }
 

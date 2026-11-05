@@ -6,7 +6,7 @@ import { dirname, join } from 'node:path';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dataDir = join(root, 'src', 'data');
-const FILES = ['config', 'sources', 'lab', 'cards', 'writing'];
+const FILES = ['config', 'sources', 'lab', 'cards', 'writing', 'game'];
 
 const errors = [];
 const warnings = [];
@@ -24,7 +24,7 @@ for (const name of FILES) {
 }
 if (errors.length) report();
 
-const { config, sources, lab, cards, writing } = data;
+const { config, sources, lab, cards, writing, game } = data;
 
 // 밑줄(_) 키와 금지어 목록을 뺀 모든 문자열을 [경로, 값]으로 모은다
 function collectStrings(obj, path, out) {
@@ -90,6 +90,18 @@ const fieldIds = new Set(writing.fields.map((f) => f.id));
 if (writing.selfCheck.items.length !== 3) fail('자기 점검 항목은 3개여야 해요');
 for (const it of writing.selfCheck.items) if (!fieldIds.has(it.fieldId)) fail(`자기 점검 ${it.id}: 없는 칸 id "${it.fieldId}"`);
 
+// game.json 검사: 배지·캐릭터 id 중복, 미션 키
+for (const list of ['badges', 'avatars']) {
+  const seen = new Set();
+  for (const b of game[list]) {
+    if (seen.has(b.id)) fail(`game.json ${list} id 중복: ${b.id}`);
+    seen.add(b.id);
+  }
+}
+for (const k of ['lab-predict', 'lab-experiment', 'lab-compare', 'lab-real', 'lab-summary', 'cards', 'write']) {
+  if (!game.missions[k]) fail(`game.json missions에 "${k}"가 없어요`);
+}
+
 // 그림 경로: 적었으면 public/ 아래에 파일이 있어야 하고, 맨 앞 '/' 없이 쓴다
 const images = [
   ...cards.cards.map((c) => [`cards.json ${c.id}`, c.image]),
@@ -105,7 +117,7 @@ for (const [where, img] of images) {
 // 6. 수치 허용 목록 (data.md 2장 표 + 쪽수·컵 수 같은 화면 숫자)
 const ALLOWED = new Set([
   '1991', '2000', '3.80', '2011', '2020', '4.27', '10', '2100', '0.63', '1.01', '2', '1', '1,200', '100', '20',
-  '2023', '3', '25', '4', '8', '14', '2022', '3,000', '6', '5', '8.5', '57', '92', '357', '361', '362',
+  '2023', '3', '25', '4', '8', '14', '2022', '3,000', '6', '5', '7', '8.5', '57', '92', '357', '361', '362',
 ]);
 const numberSkip = /(^config\.(storage|student|app)|\.url$)/;
 for (const [path, s] of allStrings) {

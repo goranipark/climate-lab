@@ -5,6 +5,7 @@ import sourcesJson from '../data/sources.json';
 import labJson from '../data/lab.json';
 import cardsJson from '../data/cards.json';
 import writingJson from '../data/writing.json';
+import gameJson from '../data/game.json';
 
 /** 영역: 생활 / 환경 / 실험 / 우리 지역 */
 export type Area = 'life' | 'env' | 'exp' | 'local';
@@ -316,12 +317,39 @@ export interface WritingData {
   closing: string;
 }
 
+/** 게임 요소 색 이름 (토큰과 연결) */
+export type GameColor = 'life' | 'env' | 'exp' | 'water' | 'attn' | 'land';
+
+export interface Badge {
+  id: string;
+  icon: string;
+  color: GameColor;
+  title: string;
+  how: string;
+}
+
+export interface GameData {
+  directorName: string;
+  ui: Record<
+    | 'cardTitle' | 'issueTitle' | 'issueGuide' | 'issueButton' | 'issuedLabel' | 'classLabel' | 'signLabel'
+    | 'openCard' | 'badgesTitle' | 'badgeCount' | 'badgeLocked' | 'badgeHow' | 'newBadge' | 'missionLabel'
+    | 'briefingStart' | 'close',
+    string
+  >;
+  avatars: { id: string; icon: string; label: string; color: GameColor }[];
+  missions: Record<MissionId, { title: string; short: string; text: string }>;
+  badges: Badge[];
+}
+
+export type MissionId = 'lab-predict' | 'lab-experiment' | 'lab-compare' | 'lab-real' | 'lab-summary' | 'cards' | 'write';
+
 // json을 타입에 맞춰 내보낸다 (구조 검사는 scripts/check-data.mjs가 함께 맡는다)
 export const config = configJson as unknown as Config;
 export const sources = (sourcesJson as unknown as { sources: Source[] }).sources;
 export const lab = labJson as unknown as LabData;
 export const cards = cardsJson as unknown as CardsData;
 export const writing = writingJson as unknown as WritingData;
+export const game = gameJson as unknown as GameData;
 
 /** 출처 id로 출처 찾기 */
 export function findSource(id: string): Source | undefined {

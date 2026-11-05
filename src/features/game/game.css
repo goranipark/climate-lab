@@ -1,0 +1,86 @@
+/* 게임 요소: 연구원증, 배지 스티커, 연구소장 미션 (design.md 6.7) */
+
+/* 스티커 배지: 검은 외곽선 + 단색 + 살짝 기울임 */
+.sticker-badge {
+  display: inline-grid; place-items: center; flex: none; border-radius: 50%;
+  border: 2px solid var(--c-ink); color: var(--c-ink);
+}
+.sb-life { background: var(--c-life); }
+.sb-env { background: var(--c-env); }
+.sb-exp { background: var(--c-exp); color: var(--c-paper); }
+.sb-water { background: var(--c-water); }
+.sb-attn { background: var(--c-attn); }
+.sb-land { background: var(--c-land); }
+.sb-ink { background: var(--c-ink); color: var(--c-paper); }
+.sb-locked { background: var(--c-mute); color: var(--c-ink-soft); border-color: var(--c-line-soft); border-style: dashed; }
+
+/* 연구원증 */
+.id-card { width: 100%; max-width: 26rem; background: var(--c-paper); border: 2px solid var(--c-ink); border-radius: var(--r-card); overflow: hidden; }
+.id-band { padding: var(--sp-2) var(--sp-4); background: var(--c-ink); color: var(--c-paper); font-weight: 800; letter-spacing: 0.04em; }
+.id-body { display: flex; align-items: center; gap: var(--sp-4); padding: var(--sp-4); }
+.id-info { display: flex; flex-direction: column; gap: 0.125rem; }
+.id-name { font-size: var(--fs-heading); font-weight: 800; line-height: 1.15; }
+.id-class { font-weight: 700; }
+.id-sign { display: flex; justify-content: flex-end; align-items: baseline; gap: var(--sp-2); padding: 0 var(--sp-4) var(--sp-3); }
+.id-director { font-weight: 800; font-style: italic; border-bottom: 1.5px solid var(--c-ink); padding: 0 var(--sp-2); }
+
+/* 연구원증 발급 화면 */
+.issue { min-height: 100%; display: grid; place-items: center; padding: var(--sp-6) var(--sp-4); background: var(--c-canvas); }
+.issue-inner { display: flex; flex-direction: column; align-items: center; gap: var(--sp-3); width: 100%; max-width: 36rem; text-align: center; }
+.avatar-grid { display: grid; grid-template-columns: repeat(6, 1fr); gap: var(--sp-2); width: 100%; }
+.avatar-pick {
+  display: flex; flex-direction: column; align-items: center; gap: var(--sp-1); padding: var(--sp-2);
+  border: 2px solid transparent; border-radius: var(--r-card); background: var(--c-paper); font-size: var(--fs-caption); font-weight: 700;
+}
+.avatar-pick:hover { border-color: var(--c-line-soft); }
+.avatar-on, .avatar-on:hover { border-color: var(--c-ink); background: var(--c-attn-wash); }
+
+/* 연구원증과 배지 보기 */
+.researcher { display: grid; grid-template-columns: 22rem minmax(0, 1fr); gap: var(--sp-6); align-items: start; }
+.badge-section { width: 100%; }
+.badge-head { display: flex; align-items: baseline; gap: var(--sp-2); font-size: var(--fs-subheading); font-weight: 800; margin-bottom: var(--sp-2); }
+.badge-grid { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-2); }
+.badge-item { display: flex; flex-direction: column; align-items: center; gap: var(--sp-1); text-align: center; }
+.badge-title { font-size: var(--fs-caption); font-weight: 800; line-height: 1.3; }
+.badge-how { font-size: 0.75rem; color: var(--c-ink-soft); line-height: 1.3; }
+.badge-off .badge-title { color: var(--c-ink-soft); }
+
+/* 새 배지 알림 */
+.badge-pop-zone { position: fixed; top: calc(var(--h-topbar) + var(--sp-3)); right: var(--sp-4); z-index: 150; pointer-events: none; }
+.badge-pop {
+  display: flex; align-items: center; gap: var(--sp-3); padding: var(--sp-3) var(--sp-4) var(--sp-3) var(--sp-3);
+  background: var(--c-paper); border: 2px solid var(--c-ink); border-radius: var(--r-card);
+  animation: badge-in 0.35s ease-out;
+}
+.badge-pop-label { font-size: var(--fs-caption); font-weight: 700; color: var(--c-ink-soft); }
+.badge-pop-title { font-size: var(--fs-subheading); font-weight: 800; }
+@keyframes badge-in {
+  0% { transform: translateY(-0.5rem) scale(0.9); opacity: 0; }
+  70% { transform: translateY(0) scale(1.04); opacity: 1; }
+  100% { transform: none; }
+}
+
+/* 연구소장 */
+.director { display: inline-grid; place-items: center; flex: none; border-radius: 50%; background: var(--c-ink); color: var(--c-paper); border: 2px solid var(--c-ink); }
+.briefing { display: flex; flex-direction: column; gap: var(--sp-3); }
+.briefing-who { display: flex; align-items: center; gap: var(--sp-3); }
+.briefing-name { font-weight: 800; }
+.briefing-title { font-size: var(--fs-heading); font-weight: 800; line-height: 1.25; }
+.briefing-text { font-size: 1.0625rem; line-height: 1.65; padding: var(--sp-3) var(--sp-4); background: var(--c-canvas); border-radius: var(--r-item); }
+.mission-chip {
+  display: inline-flex; align-items: center; gap: var(--sp-2); min-width: 0; margin-left: auto;
+  height: 2.5rem; padding: 0 var(--sp-3) 0 0.25rem; border-radius: var(--r-pill);
+  border: var(--bw) solid var(--c-ink); background: var(--c-paper); font-size: var(--fs-caption); font-weight: 700;
+}
+.mission-chip:hover { background: #f2f2f2; }
+.mission-label { padding: 0 0.375rem; border-radius: var(--r-pill); background: var(--c-attn); border: 1px solid var(--c-ink); }
+.mission-short { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+/* 상단 바: 연구원 단추 */
+.researcher-btn {
+  display: inline-flex; align-items: center; gap: var(--sp-2); height: var(--h-btn-sm); padding: 0 var(--sp-3) 0 0.125rem;
+  border-radius: var(--r-pill); border: var(--bw) solid var(--c-ink); background: var(--c-paper);
+  font-size: var(--fs-caption); font-weight: 700; white-space: nowrap;
+}
+.researcher-btn:hover { background: #f2f2f2; }
+.researcher-count { display: inline-flex; align-items: center; gap: 0.2rem; padding-left: var(--sp-2); border-left: 1px solid var(--c-line-soft); }

@@ -13,6 +13,11 @@ import { NotesPanel } from './features/notes/NotesPanel';
 import { LabTab } from './features/lab/LabTab';
 import { CardsTab } from './features/cards/CardsTab';
 import { WriteTab } from './features/write/WriteTab';
+import { IssueCard } from './features/game/IssueCard';
+import { BadgePopup } from './features/game/BadgePopup';
+import { MissionBriefing } from './features/game/Mission';
+import { ResearcherModal } from './features/game/ResearcherModal';
+import type { MissionId } from './types/data';
 import { RecordProvider, useRecord } from './store/RecordContext';
 import { collectedCardCounts, isTeacher, isWriteUnlocked } from './store/selectors';
 import { deleteRecord, loadUiPrefs, saveRecord, saveUiPrefs } from './store/storage';
@@ -71,7 +76,7 @@ function Main({ large, onToggleLarge, onSignOut, onReplace }: MainProps) {
   const { record, dispatch, flush } = useRecord();
   const { toast, confirm } = useFeedback();
   const [tab, setTab] = useHashTab(record.ui.tab);
-  const [dialog, setDialog] = useState<'export' | 'import' | null>(null);
+  const [dialog, setDialog] = useState<'export' | 'import' | 'researcher' | null>(null);
   // 큰 글자 모드에서는 노트가 접힌 상태로 시작
   const [notesCollapsed, setNotesCollapsed] = useState(large);
   const writeOpen = isWriteUnlocked(record);
@@ -106,9 +111,16 @@ function Main({ large, onToggleLarge, onSignOut, onReplace }: MainProps) {
     }
   }
 
+  // 처음 시작한 학생은 연구원증부터 (교사 시연 모드는 건너뜀)
+  if (!record.game.avatar && !isTeacher(record)) return <IssueCard />;
+
+  // 지금 화면의 미션: ③은 단계별, ④⑦은 탭별
+  const missionId: MissionId = tab === 'lab' ? (`lab-${record.ui.labStep}` as MissionId) : tab;
+  const missionReady = tab !== 'write' || writeOpen;
+
   return (
     <div className="app">
-      <TopBar tab={tab} onTab={setTab} large={large} onToggleLarge={onToggleLarge} onMenu={onMenu} />
+      <TopBar tab={tab} onTab={setTab} large={large} onToggleLarge={onToggleLarge} onMenu={onMenu} onResearcher={() => setDialog('researcher')} />
       <div className={`app-body ${notesCollapsed ? 'notes-off' : ''}`}>
         <main className="content" id="content">
           <TabContent tab={tab} />
@@ -116,6 +128,9 @@ function Main({ large, onToggleLarge, onSignOut, onReplace }: MainProps) {
         <NotesPanel collapsed={notesCollapsed} onToggle={() => setNotesCollapsed((v) => !v)} overlay={large && !notesCollapsed} />
       </div>
       {dialog === 'export' && <ExportDialog onClose={() => setDialog(null)} />}
+      {dialog === 'researcher' && <ResearcherModal onClose={() => setDialog(null)} />}
+      {!dialog && missionReady && !isTeacher(record) && <MissionBriefing key={missionId} id={missionId} />}
+      <BadgePopup />
       {dialog === 'import' && (
         <ImportDialog
           onClose={() => setDialog(null)}

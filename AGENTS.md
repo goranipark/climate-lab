@@ -21,6 +21,7 @@
 | `src/types/`, `src/store/*.ts`(slices 제외), `src/App.tsx`, `src/components/`, `src/styles/tokens.css`·`base.css`·`app.css`, `src/data/config.json` | Opus | PR 설명에 "공용 파일 변경 요청"으로 적고 Opus가 반영 |
 | `src/features/lab/`, `src/store/slices/lab.ts`, `src/data/lab.json`(문구) | Opus | — |
 | `src/features/write/`, `src/store/slices/write.ts`, `src/data/writing.json`(문구) | Opus | — |
+| `src/features/game/`, `src/store/slices/game.ts`, `src/data/game.json` (게임 요소: 연구원증·미션·배지) | Opus | 배지 조건이 카드 기록에 기대면 PR에 적기 |
 | `src/features/cards/`, `src/store/slices/cards.ts`, `src/data/cards.json`(문구) | GPT 6.1 | `image` 칸은 Codex도 고칠 수 있음 |
 | `scripts/screen-check.mjs`, `scripts/make-qr.mjs`, `vercel.json`, PWA 설정 | GPT 6.1 | `vite.config.ts`를 고치면 PR에 적기 |
 | `public/images/**` | Codex | — |

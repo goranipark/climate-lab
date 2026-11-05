@@ -10,6 +10,8 @@ import { ExperimentStep } from './steps/ExperimentStep';
 import { CompareStep } from './steps/CompareStep';
 import { RealStep } from './steps/RealStep';
 import { SummaryStep } from './steps/SummaryStep';
+import { MissionChip } from '../game/Mission';
+import type { MissionId } from '../../types/data';
 import './lab.css';
 
 export function LabTab() {
@@ -31,7 +33,10 @@ export function LabTab() {
 
   return (
     <section className="lab" aria-label={title}>
-      <Stepper record={record} current={step} onGo={go} />
+      <div className="lab-top">
+        <Stepper record={record} current={step} onGo={go} />
+        <MissionChip id={`lab-${step}` as MissionId} />
+      </div>
       <h1 className="sr-only">{title}</h1>
       {step === 'predict' && <PredictStep onNext={next} />}
       {step === 'experiment' && <ExperimentStep onNext={next} />}

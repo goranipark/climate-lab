@@ -7,7 +7,7 @@ interface Props {
   onClose: () => void;
   labelledBy: string;
   title?: string;
-  size?: 'small' | 'medium';
+  size?: 'small' | 'medium' | 'wide';
   children: ReactNode;
 }
 

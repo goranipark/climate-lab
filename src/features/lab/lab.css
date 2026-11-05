@@ -1,7 +1,8 @@
 /* ③ 해수면 실험실 화면 (design.md 2.4·5장) */
 .lab { max-width: 62.375rem; margin: 0 auto; display: flex; flex-direction: column; gap: var(--sp-4); }
 
-/* 단계 표시줄 */
+/* 단계 표시줄 + 미션 표시 */
+.lab-top { display: flex; align-items: center; gap: var(--sp-3); min-width: 0; }
 .stepper { list-style: none; margin: 0; padding: 0; display: flex; align-items: center; gap: var(--sp-1); height: 3rem; }
 .stepper-item { position: relative; display: flex; align-items: center; gap: var(--sp-1); }
 .stepper-arrow { color: var(--c-ink-soft); }
