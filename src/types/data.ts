@@ -129,6 +129,28 @@ export interface LabData {
   models: { id: ModelId; label: string }[];
   states: { id: StateId; label: string; predictLabel: string }[];
   steps: { id: 'predict' | 'experiment' | 'compare' | 'real' | 'summary'; label: string; title: string }[];
+  ui: {
+    stepLocked: Record<'experiment' | 'compare' | 'real' | 'summary', string>;
+    nextStep: string;
+    predictDone: string;
+    recordTitle: string;
+    recordWaiting: string;
+    pastRecords: string;
+    collectRow: string;
+    modelCol: string;
+    sameMark: string;
+    diffMark: string;
+    photoPick: string;
+    photoRemove: string;
+    prevScene: string;
+    nextScene: string;
+    factsTitle: string;
+    summarySaved: string;
+    tankLabel: string;
+    cupLabel: string;
+    modelButton: string;
+    replayCup: string;
+  };
   predict: {
     question: string;
     reasonLabel: string;

@@ -59,6 +59,34 @@
       "title": "알게 된 것을 정리해요"
     }
   ],
+  "ui": {
+    "_설명": "③ 화면 공용 문구 (단계 표시줄, 버튼, 화면 읽기용 설명)",
+    "stepLocked": {
+      "experiment": "예측을 먼저 제출하면 열려요.",
+      "compare": "컵 3잔까지 모두 기록하면 열려요.",
+      "real": "예측과 결과가 같았는지 답하면 열려요.",
+      "summary": "그림 3장을 모두 보면 열려요."
+    },
+    "nextStep": "다음 단계로",
+    "predictDone": "예측을 제출했어요.",
+    "recordTitle": "컵 {cup}잔 기록",
+    "recordWaiting": "컵을 부으면 여기에 기록해요.",
+    "pastRecords": "지난 기록",
+    "collectRow": "근거 노트에 담기",
+    "modelCol": "모형",
+    "sameMark": "같아요",
+    "diffMark": "달랐어요",
+    "photoPick": "사진 찍기·고르기",
+    "photoRemove": "사진 지우기",
+    "prevScene": "이전 그림",
+    "nextScene": "다음 그림",
+    "factsTitle": "함께 보는 자료",
+    "summarySaved": "노트에 담았어요",
+    "tankLabel": "옆에서 본 디지털 수조",
+    "cupLabel": "컵: 끌어서 수조에 놓으면 물을 부어요",
+    "modelButton": "{model} 가까이 보기",
+    "replayCup": "다시 보기: 컵 {cup}잔"
+  },
   "predict": {
     "question": "수조에 물을 부으면 섬·집·나무 모형은 어떻게 될까?",
     "reasonLabel": "내 생각의 까닭",
