@@ -1,7 +1,7 @@
 # todo.md — 기후변화 탐사 연구소 구현 순서
 
 > 근거 문서: concept.md(기능) · design.md(화면) · data.md + `src/data/*.json`(내용)
-> 이 문서의 범위: React(Vite) 정적 사이트 구현 순서, 로컬 실행용 setup 스크립트, Vercel 배포
+> 이 문서의 범위: React(Vite) 정적 사이트 구현 순서, 로컬 실행용 setup 스크립트, GitHub Pages 배포
 > 작성일: 2026-11-04 · 4~5차시(모형실험): **11/16~20 주**
 
 ---
@@ -17,7 +17,7 @@
 | 11/6(금)~11/10(화) | ④ 영향 탐사 카드 (병행, 11/6 PR #2 검토 완료) | M3 | GPT 6.1 |
 | 11/6(금)~11/10(화) | 실제 그림 3장(11/9까지), 카드 그림 11장(11/10까지), 아이콘 | 애셋 A·B·C | Codex |
 | 11/11(수) | 서로 검토, `main` 합치기, 배포 도구(화면 검사·QR·오프라인) | M4 준비 | GPT 6.1 (도구), Opus (합치기) |
-| **11/12(목)** | **1차 배포** (③④ + 노트 + 저장) | M4 | Opus + 교사 승인 |
+| **11/12(목)** | **1차 배포** (③④ + 노트 + 저장, GitHub Pages) | M4 | Opus + 교사 승인 |
 | 11/13(금) | 교사 크롬북·전자칠판 리허설, 반별 QR 출력, 급한 수정 | M4 | 교사, Opus |
 | **11/16~20** | **4~5차시 수업** (실사용 = 시범 사용). 수업 중 나온 문제 기록 | — | 교사 |
 | 11/23(월)~11/26(목) | ⑦ 서술 연습 / 수업 피드백 반영 | M5 | Opus / GPT 6.1 |
@@ -57,7 +57,7 @@
 | 오프라인 | `vite-plugin-pwa` (generateSW, 정적 파일 미리 저장) | 첫 접속 뒤 네트워크가 끊겨도 동작 |
 | 테스트 | `vitest` + `@testing-library/react`, 화면 검사는 `playwright` | 규칙(잠금·저장·완성 글)과 1366×630 한 화면 검사 |
 | QR | `qrcode` (개발용 스크립트에서만) | 반별 접속 QR 이미지 만들기 |
-| Node | 20 LTS 이상 | Vercel 기본값과 맞춤 |
+| Node | 20 LTS 이상 | GitHub Actions 배포와 맞춤 |
 
 ## 3. 폴더 구조
 
@@ -66,7 +66,8 @@ climate-lab/
 ├─ concept.md  design.md  data.md  todo.md     # 기획 문서
 ├─ setup.sh  setup.bat                         # 로컬 실행 스크립트 (5장)
 ├─ index.html                                  # <html lang="ko">
-├─ package.json  tsconfig.json  vite.config.ts  vercel.json
+├─ package.json  tsconfig.json  vite.config.ts
+├─ .github/workflows/deploy-pages.yml           # GitHub Pages 자동 배포
 ├─ public/
 │  ├─ images/                                  # 교사가 바꿔 넣는 그림 (data.md 8장)
 │  └─ icon-192.png  icon-512.png               # PWA 아이콘
@@ -215,7 +216,7 @@ climate-lab/
 ### M4. 1차 배포 + 리허설 (11/11~11/13) · 도구 GPT 6.1, 배포 Opus — 6장, concept.md 9장
 
 - [ ] `vite-plugin-pwa` 설정(정적 파일 미리 저장, 자동 업데이트). 업데이트가 있으면 다음 접속에서 반영
-- [ ] `vercel.json` 작성(6.3), Vercel 배포(6장)
+- [x] GitHub Pages 자동 배포 워크플로(6장, 11/6 Vercel에서 변경)
 - [ ] `scripts/screen-check.mjs`: Playwright로 1366×630에서 ③ 각 단계·④ 화면을 열어 세로 스크롤이 없는지 확인하고 스크린샷 저장. 1920×1080 + 큰 글자 모드도 같은 검사
 - [ ] `scripts/make-qr.mjs`: 배포 주소 + `?class=1~N` QR PNG를 `qr/`에 만들기 (`npm run qr -- https://배포주소`)
 - [ ] concept.md 9장 완료 기준 중 ③④·저장 항목 직접 확인
@@ -294,82 +295,40 @@ npm run check:data
 
 > `dev`와 `preview`는 `--host`로 실행되므로, 같은 와이파이의 크롬북에서 화면에 표시되는 `Network:` 주소로 접속해 볼 수 있다. 학교 와이파이에서 기기끼리 접속이 막혀 있으면 이 방법은 안 되고, Vercel 배포본으로 확인한다.
 
-## 6. 배포 (Vercel)
+## 6. 배포 (GitHub Pages)
 
-서버 없는 정적 사이트라 Vercel 무료(Hobby) 요금제로 충분하다. 빌드 결과물(`dist/`)만 올라간다.
+> 11/6 결정: 학교 방화벽에서 Vercel이 막혀 있어 **GitHub Pages**로 배포한다. 서버 없는 정적 사이트라 그대로 올라간다.
 
-### 6.1 방법 A: GitHub 연결 (추천)
+배포 주소: **https://goranipark.github.io/climate-lab/**
 
-코드를 GitHub에 올려 두면, 고칠 때마다 자동으로 다시 배포된다.
+### 6.1 처음 한 번: Pages 켜기 (교사)
 
-1. GitHub에 저장소를 만들고 이 폴더를 올린다(`qr/`, `node_modules/`, `dist/`는 `.gitignore`).
-2. <https://vercel.com> 로그인 → **Add New… → Project** → 그 저장소 **Import**.
-3. 설정 확인 후 **Deploy**:
+1. 저장소가 **비공개(Private)**이면 무료 계정에서는 Pages를 쓸 수 없다. 둘 중 하나를 고른다.
+   - 저장소를 공개로 바꾸기: **Settings → General → Danger Zone → Change visibility → Public** (저장소에는 학생 정보·비밀번호가 없다. 학생 기록은 각 크롬북 브라우저에만 저장된다)
+   - 또는 GitHub Pro 이상 요금제 쓰기
+2. **Settings → Pages → Build and deployment → Source**를 **GitHub Actions**로 바꾼다.
+3. **Actions** 탭 → **Deploy to GitHub Pages** → **Run workflow**(또는 `main`에 새로 올리면 자동 실행).
+4. 초록 체크가 뜨면 배포 주소로 접속해 확인한다.
 
-   | 항목 | 값 |
-   | --- | --- |
-   | Framework Preset | Vite |
-   | Build Command | `npm run build` |
-   | Output Directory | `dist` |
-   | Install Command | `npm ci` |
-   | Node.js Version | 20.x 이상 |
-   | Environment Variables | **없음** (API 키를 쓰지 않는다) |
+### 6.2 그다음부터: 자동 배포
 
-4. 배포 주소(`https://프로젝트이름.vercel.app`)가 나온다. **Settings → Domains**에서 기억하기 쉬운 이름으로 바꿀 수 있다(예: `climate-lab-4.vercel.app`).
-5. 이후에는 `main` 브랜치에 올릴 때마다 자동 배포. 다른 브랜치에 올리면 미리보기 주소가 따로 생겨 수업용 주소에 영향 없이 확인할 수 있다.
+- `main`에 합치면 `.github/workflows/deploy-pages.yml`이 **검사(`npm run check`) → 빌드 → 배포**를 자동으로 한다. 검사가 실패하면 배포하지 않아서, 고장 난 버전이 학생에게 가지 않는다.
+- 배포에는 보통 1~2분이 걸린다. 진행 상황은 **Actions** 탭에서 본다.
+- 앱은 해시 이동(`#/lab`)과 상대 경로(`base: './'`)를 써서 `/climate-lab/` 아래에서도 그대로 동작한다. 따로 주소 설정이 필요 없다.
 
-### 6.2 방법 B: 명령어로 바로 배포
+### 6.3 배포 뒤 할 일
 
-GitHub 없이 선생님 컴퓨터에서 바로 올릴 때:
-
-```bash
-npx vercel login
-```
-
-```bash
-npx vercel
-```
-
-(처음 한 번: 질문에 기본값으로 답하면 Vite 설정을 알아서 찾는다. 미리보기 주소가 나온다.)
-
-```bash
-npx vercel --prod
-```
-
-(수업용 주소에 반영)
-
-### 6.3 vercel.json
-
-해시 이동(`#/lab`)을 쓰므로 주소 다시 쓰기(rewrite)는 필요 없다. 캐시만 정한다.
-
-```json
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "headers": [
-    {
-      "source": "/assets/(.*)",
-      "headers": [{ "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }]
-    },
-    {
-      "source": "/(index.html|sw.js|manifest.webmanifest)",
-      "headers": [{ "key": "Cache-Control", "value": "no-cache" }]
-    }
-  ]
-}
-```
-
-### 6.4 배포 뒤 할 일
-
-- [ ] 반별 QR 만들기: `npm run qr -- https://배포주소` → `qr/1반.png` … (주소 끝에 `?class=1` 등이 붙어 반이 미리 골라짐)
+- [ ] **학교 크롬북에서 `goranipark.github.io`가 열리는지 확인** (방화벽 확인)
+- [ ] 반별 QR 만들기: `npm run qr -- https://goranipark.github.io/climate-lab/` → `qr/1반.png` … (주소 끝에 `?class=1` 등이 붙어 반이 미리 골라짐)
 - [ ] 반별 패들렛에 접속 주소와 "내 기록 코드" 칸 만들기
-- [ ] 교사 크롬북·전자칠판에서 6.1의 주소로 리허설(M4)
-- [ ] 수업 직전에 고친 내용을 배포했다면, 학생 크롬북에서 한 번 새로고침해 새 버전을 받게 하기(오프라인 저장 때문에 이전 버전이 보일 수 있음)
+- [ ] 교사 크롬북·전자칠판에서 리허설(M4)
+- [ ] 수업 직전에 고친 내용을 배포했다면, 학생 크롬북에서 한 번 새로고침해 새 버전을 받게 하기
 
-### 6.5 json만 고쳐서 다시 배포하기 (교사용)
+### 6.4 json만 고쳐서 다시 배포하기 (교사용)
 
-1. `src/data/*.json` 수정(data.md 8장)
-2. `npm run check:data`
-3. 방법 A: GitHub에 올리기(웹에서 파일 바로 고쳐도 됨) → 자동 배포 / 방법 B: `npx vercel --prod`
+1. GitHub 웹에서 `src/data/*.json` 파일을 열고 연필 아이콘으로 고친다(data.md 8장).
+2. **Commit changes** → `main`에 저장하면 자동으로 검사·배포된다.
+3. Actions 탭에 빨간 ✗가 뜨면 검사에서 걸린 것이다(따옴표·쉼표 실수, 금지어 등). 눌러서 어느 줄인지 확인하고 고친다.
 
 ## 7. 테스트 목록 요약
 

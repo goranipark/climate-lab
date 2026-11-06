@@ -23,7 +23,7 @@
 | `src/features/write/`, `src/store/slices/write.ts`, `src/data/writing.json`(문구) | Opus | — |
 | `src/features/game/`, `src/store/slices/game.ts`, `src/data/game.json` (게임 요소: 연구원증·미션·배지) | Opus | 배지 조건이 카드 기록에 기대면 PR에 적기 |
 | `src/features/cards/`, `src/store/slices/cards.ts`, `src/data/cards.json`(문구) | GPT 6.1 | `image` 칸은 Codex도 고칠 수 있음 |
-| `scripts/screen-check.mjs`, `scripts/make-qr.mjs`, `vercel.json`, PWA 설정 | GPT 6.1 | `vite.config.ts`를 고치면 PR에 적기 |
+| `scripts/screen-check.mjs`, `scripts/make-qr.mjs`, PWA 설정 | GPT 6.1 | `vite.config.ts`를 고치면 PR에 적기 |
 | `public/images/**` | Codex | — |
 | `src/data/*.json`의 `image` 칸 | Codex | — |
 | `*.md` 기획 문서 | Opus (교사 결정 반영) | 고칠 내용을 PR에 적기 |
@@ -43,7 +43,7 @@
 1. 항상 최신 `main`에서 브랜치를 만든다.
 2. 작업이 끝나면 `npm run check`가 통과한 상태로 PR을 연다. PR 설명에 ① 한 일 ② 확인한 것(스크린샷 1366×630) ③ 공용 파일 변경 요청을 적는다.
 3. 다른 코딩 담당이 검토하고, 교사가 승인하면 `main`에 합친다.
-4. `main`에 합치면 Vercel이 자동으로 배포한다(M4 이후). 그래서 **수업 중(11/16~20)에는 수업 시간 밖에서만 합친다.**
+4. `main`에 합치면 GitHub Pages로 자동 배포된다(`.github/workflows/deploy-pages.yml`, 검사 통과 시에만). 워크플로 파일은 Opus 담당. 그래서 **수업 중(11/16~20)에는 수업 시간 밖에서만 합친다.**
 
 ## 4. 모든 코드에 지키는 규칙
 
