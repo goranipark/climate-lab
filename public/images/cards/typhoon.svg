@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-labelledby="title">
+<title id="title">바람에 크게 휘어진 나무와 바닷가 집</title>
+<g stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path vector-effect="non-scaling-stroke" d="M20 165 Q87 153 155 164 T280 161 L280 188 H20 Z" fill="#4da2ff"/><g transform="translate(36 79) scale(0.94)"><rect vector-effect="non-scaling-stroke" x="5" y="30" width="70" height="54" rx="0" fill="#ffffff"/><path vector-effect="non-scaling-stroke" d="M0 32 L40 0 L80 32 Z" fill="#fb4903"/><rect vector-effect="non-scaling-stroke" x="34" y="56" width="15" height="28" rx="0" fill="#8a5a2b"/><rect vector-effect="non-scaling-stroke" x="15" y="44" width="13" height="14" rx="0" fill="#dceeff"/><rect vector-effect="non-scaling-stroke" x="56" y="44" width="12" height="14" rx="0" fill="#dceeff"/></g><path vector-effect="non-scaling-stroke" d="M211 172 Q211 116 174 80 L182 74 Q225 112 227 172 Z" fill="#8a5a2b"/><path vector-effect="non-scaling-stroke" d="M177 81 Q140 93 132 67 Q107 57 130 41 Q142 18 165 35 Q180 16 194 40 Q216 40 209 60 Q200 79 177 81 Z" fill="#55db9c"/><path vector-effect="non-scaling-stroke" d="M126 42 H99 Q86 42 89 31 M227 78 H275 Q290 78 284 64 M230 107 H266 Q280 107 278 97" fill="none"/>
+</g>
+</svg>

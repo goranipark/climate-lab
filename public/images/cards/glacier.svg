@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-labelledby="title">
+<title id="title">산골짜기에 남은 작은 빙하</title>
+<g stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path vector-effect="non-scaling-stroke" d="M20 176 L91 42 L149 118 L211 28 L280 177 Z" fill="#cccccc"/><path vector-effect="non-scaling-stroke" d="M67 88 L91 42 L117 76 L104 79 L92 69 L81 87 Z" fill="#ffffff"/><path vector-effect="non-scaling-stroke" d="M177 79 L211 28 L244 89 L220 77 L210 60 L196 82 Z" fill="#ffffff"/><path vector-effect="non-scaling-stroke" d="M145 131 L164 107 L186 125 L207 165 L187 184 L103 184 L117 157 Z" fill="#ffffff"/><path vector-effect="non-scaling-stroke" d="M164 107 L158 145 L179 168 L160 184 H187 L207 165 L186 125 Z" fill="#dceeff"/><path vector-effect="non-scaling-stroke" d="M145 131 L133 158 L146 171 M179 168 L188 154" fill="none"/>
+</g>
+</svg>
