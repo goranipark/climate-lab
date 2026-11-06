@@ -2,7 +2,7 @@
 import { fireEvent, render, screen, within, waitFor } from '@testing-library/react';
 import App from '../../App';
 import data from '../../data/cards.json';
-import { config } from '../../types/data';
+import { config, game } from '../../types/data';
 import { loadRecord } from '../../store/storage';
 
 // jsdom에는 없는 네이티브 대화상자의 열림 상태만 보충한다.
@@ -20,7 +20,11 @@ function start() {
   fireEvent.change(inputs[0], { target: { value: '12' } });
   fireEvent.change(inputs[1], { target: { value: 'Kim' } });
   fireEvent.click(screen.getByRole('button', { name: config.ui.start.startButton }));
+  // 게임 요소(연구원증·미션 브리핑)를 지나 카드 탭으로
+  fireEvent.click(screen.getByRole('button', { name: game.ui.issueButton }));
+  fireEvent.click(screen.getByRole('button', { name: game.ui.briefingStart }));
   fireEvent.click(screen.getByRole('button', { name: config.ui.tabs.cards }));
+  fireEvent.click(screen.getByRole('button', { name: game.ui.briefingStart }));
 }
 
 // 격자에서 카드를 열어 뒷면을 읽는다.

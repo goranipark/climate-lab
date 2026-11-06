@@ -43,3 +43,55 @@
 @keyframes cards-turn { from { transform: perspective(60rem) rotateY(-180deg); opacity: 0; } to { transform: perspective(60rem) rotateY(0); opacity: 1; } }
 @keyframes cards-fade { from { opacity: 0; } to { opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .cards-dialog[open] { animation: cards-fade 0.15s ease-out; } .cards-face { animation: cards-fade 0.15s ease-out; } }
+
+/* ───────── 입체 카드 판 (11/6 교사 요청, design.md 3.6) ─────────
+   두꺼운 카드 종이 느낌: 위쪽 광택, 아래 그림자, 마우스를 올리면 살짝 들림 */
+.cards-tile {
+  border-color: #1f2a44;
+  background: linear-gradient(180deg, #ffffff 0%, #f3f6fa 100%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 -3px 0 rgba(31, 42, 68, 0.08) inset, var(--depth-2);
+  transition: transform 0.18s ease-out, box-shadow 0.18s ease-out;
+  transform-style: preserve-3d;
+}
+.cards-tile:hover, .cards-tile:focus-within {
+  transform: translateY(-0.25rem) rotateX(4deg);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 14px 22px rgba(31, 42, 68, 0.32), 0 4px 6px rgba(31, 42, 68, 0.2);
+}
+.cards-tile:active { transform: translateY(0) scale(0.98); }
+.cards-grid { perspective: 60rem; }
+
+/* 윗띠: 영역 색에 위쪽 광택 */
+.cards-band {
+  background: linear-gradient(180deg, color-mix(in srgb, var(--cards-color) 70%, #ffffff) 0%, var(--cards-color) 55%, color-mix(in srgb, var(--cards-color) 85%, #000000) 100%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 1px 0 rgba(31, 42, 68, 0.25);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.45);
+}
+
+/* 그림 자리: 조명을 받은 무대처럼 가운데가 밝게 */
+.cards-image {
+  background: radial-gradient(ellipse at 50% 35%, #ffffff 0%, var(--cards-wash) 65%, color-mix(in srgb, var(--cards-wash) 80%, var(--cards-color)) 100%);
+  box-shadow: inset 0 -6px 10px rgba(31, 42, 68, 0.08), inset 0 2px 0 rgba(255, 255, 255, 0.7);
+}
+.cards-image img { filter: drop-shadow(0 4px 4px rgba(31, 42, 68, 0.25)); }
+.cards-placeholder { filter: drop-shadow(0 3px 3px rgba(31, 42, 68, 0.25)); }
+
+/* 담은 표시: 광택 메달 */
+.cards-check {
+  border: 2px solid #1f2a44;
+  background-image: radial-gradient(circle at 32% 26%, rgba(255, 255, 255, 0.8) 0 16%, rgba(255, 255, 255, 0) 17%);
+  box-shadow: 0 0 0 2px var(--metal-hi), 0 0 0 3.5px var(--metal-lo), inset 0 -3px 4px rgba(0, 0, 0, 0.25), var(--depth-1);
+}
+/* 안 읽은 카드: 반짝이는 금색 점 */
+.cards-unread { background: var(--gold-face); border-color: var(--gold-lo); box-shadow: 0 0 0 2px rgba(255, 242, 176, 0.6); }
+
+/* 크게 보기: 두꺼운 카드 + 큰 그림자 + 입체 뒤집기 */
+.cards-dialog {
+  border-color: #1f2a44;
+  background: linear-gradient(180deg, color-mix(in srgb, var(--cards-wash) 60%, #ffffff), var(--cards-wash));
+  box-shadow: inset 0 2px 0 rgba(255, 255, 255, 0.8), 0 24px 48px rgba(31, 42, 68, 0.45), 0 6px 12px rgba(31, 42, 68, 0.25);
+}
+.cards-dialog .cards-image { border-radius: var(--r-item); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cards-tile, .cards-tile:hover, .cards-tile:focus-within { transition: none; transform: none; }
+}
