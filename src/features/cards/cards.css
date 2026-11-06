@@ -1,0 +1,45 @@
+/* 카드 전용 배치와 크기: 기본 화면의 여섯 열·두 줄을 유지한다. */
+.cards-tab {
+  --cards-row: 13.125rem;
+  --cards-image: 6.5rem;
+  max-width: 62.375rem; margin: 0 auto;
+}
+.cards-toolbar { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-3); margin-bottom: var(--sp-4); min-height: var(--h-btn); }
+.cards-filters { display: flex; gap: var(--sp-1); }
+.cards-progress { font-size: var(--fs-caption); font-weight: 700; }
+.cards-grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: var(--sp-3); }
+.cards-life, .cards-local { --cards-color: var(--c-life); --cards-wash: var(--c-life-wash); }
+.cards-env { --cards-color: var(--c-env); --cards-wash: var(--c-env-wash); }
+.cards-tile { position: relative; height: var(--cards-row); border: var(--bw-card) solid var(--c-ink); border-radius: var(--r-card); background: var(--c-paper); }
+.cards-local { border-style: dashed; }
+.cards-open { display: flex; flex-direction: column; align-items: stretch; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; text-align: left; border-radius: inherit; }
+.cards-band { display: flex; align-items: center; gap: var(--sp-1); padding: var(--sp-1) var(--sp-2); background: var(--cards-color); border-radius: var(--r-item) var(--r-item) 0 0; font-size: var(--fs-caption); font-weight: 700; }
+.cards-image { display: grid; place-items: center; height: var(--cards-image, 6.5rem); flex: none; width: 100%; background: var(--cards-wash); }
+.cards-image img { width: 100%; height: 100%; object-fit: contain; min-height: 0; }
+.cards-placeholder { width: var(--sp-12); height: var(--sp-12); }
+.cards-question { display: block; padding: var(--sp-2); font-size: var(--fs-label); line-height: 1.25; font-weight: 700; }
+.cards-check { position: absolute; right: var(--sp-1); top: var(--sp-1); display: grid; place-items: center; width: var(--sp-8); height: var(--sp-8); border: var(--bw) solid var(--c-ink); border-radius: var(--r-pill); background: var(--cards-color); transform: rotate(8deg); }
+.cards-unread { position: absolute; bottom: var(--sp-1); left: var(--sp-2); width: var(--sp-2); height: var(--sp-2); background: var(--c-attn); border: var(--bw) solid var(--c-ink); border-radius: var(--r-pill); }
+.cards-local .cards-image { height: calc(var(--cards-image, 6.5rem) - var(--sp-6)); }
+.cards-local-link { position: absolute; bottom: var(--sp-2); right: var(--sp-2); display: flex; align-items: center; gap: var(--sp-1); font-size: var(--fs-caption); text-decoration: underline; }
+.cards-empty, .cards-closing { padding: var(--sp-3); font-size: var(--fs-caption); }
+/* 네이티브 대화상자로 포커스 순환과 배경 입력 차단을 제공한다. */
+.cards-dialog { --cards-image: 12.5rem; width: 30rem; height: 27.5rem; max-width: calc(100vw - var(--sp-8)); max-height: calc(100dvh - var(--sp-8)); padding: var(--sp-4); border: var(--bw-card) solid var(--c-ink); border-radius: var(--r-panel); background: var(--cards-wash); color: var(--c-ink); margin: auto; }
+.cards-dialog[open] { display: flex; flex-direction: column; gap: var(--sp-2); animation: cards-grow 0.2s ease-out; }
+.cards-dialog::backdrop { background: color-mix(in srgb, var(--c-ink) 40%, transparent); }
+.cards-detail-head { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-2); }
+.cards-detail-head h2 { font-size: var(--fs-subheading); }
+.cards-face { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: flex-start; gap: var(--sp-2); font-size: var(--fs-label); line-height: 1.3; animation: cards-turn 0.4s ease-out; overflow: auto; }
+.cards-face p { flex-shrink: 0; }
+.cards-caption, .cards-source { font-size: var(--fs-caption); }
+.cards-source { color: var(--c-ink-soft); }
+.cards-note { width: 100%; margin-top: auto; }
+.cards-note .field-label { font-size: var(--fs-caption); }
+.cards-note .input { min-height: var(--h-btn-sm); }
+.cards-guide { font-weight: 700; }
+.cards-detail-actions { display: flex; justify-content: space-between; gap: var(--sp-2); }
+.cards-front-flip { padding: 0; border: 0; width: 100%; background: transparent; }
+@keyframes cards-grow { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+@keyframes cards-turn { from { transform: perspective(60rem) rotateY(-180deg); opacity: 0; } to { transform: perspective(60rem) rotateY(0); opacity: 1; } }
+@keyframes cards-fade { from { opacity: 0; } to { opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .cards-dialog[open] { animation: cards-fade 0.15s ease-out; } .cards-face { animation: cards-fade 0.15s ease-out; } }

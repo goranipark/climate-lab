@@ -207,5 +207,18 @@
     "image": "images/cards/local-taebaek.svg",
     "imageAlt": "지도 위에 꽂힌 핀"
   },
-  "closing": "생활과 환경 모두에 영향이 있다는 것을 알았어요. 우리가 할 수 있는 일도 함께 생각해 봐요."
+  "closing": "생활과 환경 모두에 영향이 있다는 것을 알았어요. 우리가 할 수 있는 일도 함께 생각해 봐요.",
+  "ui": {
+    "life": "생활",
+    "env": "환경",
+    "local": "우리 지역",
+    "temperature": "기온 변화",
+    "precipitation": "강수량 변화",
+    "close": "닫기",
+    "flip": "뒤집기",
+    "unread": "아직 읽지 않은 카드",
+    "source": "출처",
+    "empty": "아직 담은 카드가 없어요. 카드를 읽고 근거로 담아 보세요.",
+    "title": "④ 영향 탐사 카드"
+  }
 }
