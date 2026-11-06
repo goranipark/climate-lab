@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" role="img" aria-labelledby="title">
+<title id="title">물 위로 뿌리를 내린 맹그로브 나무와 그 사이의 작은 물고기</title>
+<g stroke="#000000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+<path vector-effect="non-scaling-stroke" d="M20 153 Q87 143 146 155 T280 153 V188 H20 Z" fill="#4da2ff"/><path vector-effect="non-scaling-stroke" d="M142 64 L161 64 L163 119 L195 164 L185 164 L154 132 L147 167 L136 167 L142 126 L112 164 L102 164 L137 116 Z" fill="#8a5a2b"/><path vector-effect="non-scaling-stroke" d="M147 119 L117 139 M161 115 L185 132" fill="none"/><path vector-effect="non-scaling-stroke" d="M95 90 Q59 87 72 59 Q59 38 88 28 Q97 8 121 24 Q149 5 167 24 Q197 11 208 37 Q238 44 224 68 Q229 94 199 94 Z" fill="#55db9c"/><g transform="translate(215 169) scale(0.52)"><path vector-effect="non-scaling-stroke" d="M-22 0 L-42 -15 L-42 15 Z" fill="#ffd731"/><path vector-effect="non-scaling-stroke" d="M-5 -14 L5 -25 L15 -13 Z" fill="#ffd731"/><ellipse vector-effect="non-scaling-stroke" cx="0" cy="0" rx="28" ry="16" fill="#ffd731"/><path vector-effect="non-scaling-stroke" d="M9 -11 Q0 0 9 11" fill="none"/><ellipse vector-effect="non-scaling-stroke" cx="16" cy="-3" rx="2" ry="2" fill="#000000"/></g>
+</g>
+</svg>
