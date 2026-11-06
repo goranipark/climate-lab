@@ -305,14 +305,30 @@ function PastRows({ current, onPick }: { current: CupKey | null; onPick: (cup: C
   );
 }
 
-/** 컵 그림: level은 컵 안 물의 양(0~1) */
+/** 컵 그림: 유리컵 느낌(반사광·두께). level은 컵 안 물의 양(0~1) */
 function CupSvg({ level }: { level: number }) {
   const top = 22 + (1 - level) * 52;
+  const inset = (y: number) => (y - 10) * 0.085;
   return (
     <svg viewBox="0 0 72 88" width="100%" height="100%" aria-hidden>
-      <path d="M10 10 L62 10 L56 80 L16 80 Z" fill="var(--c-paper)" stroke="var(--c-ink)" strokeWidth="2.5" strokeLinejoin="round" />
-      {level > 0 && <path d={`M${10 + (top - 10) * 0.085} ${top} L${62 - (top - 10) * 0.085} ${top} L56 80 L16 80 Z`} fill="var(--c-water)" />}
-      <path d="M10 10 L62 10 L56 80 L16 80 Z" fill="none" stroke="var(--c-ink)" strokeWidth="2.5" strokeLinejoin="round" />
+      <defs>
+        <linearGradient id="cup-glass" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0" stopColor="#ffffff" stopOpacity="0.95" />
+          <stop offset="0.5" stopColor="#e3f1fb" stopOpacity="0.85" />
+          <stop offset="1" stopColor="#c3dcef" stopOpacity="0.95" />
+        </linearGradient>
+        <linearGradient id="cup-water" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stopColor="#8ccbff" />
+          <stop offset="1" stopColor="#1d6fd6" />
+        </linearGradient>
+      </defs>
+      <ellipse cx="36" cy="83" rx="22" ry="3.5" fill="#1f2a44" opacity="0.2" />
+      <path d="M10 10 L62 10 L56 80 L16 80 Z" fill="url(#cup-glass)" stroke="#1f2a44" strokeWidth="2" strokeLinejoin="round" />
+      {level > 0 && <path d={`M${10 + inset(top)} ${top} L${62 - inset(top)} ${top} L56 80 L16 80 Z`} fill="url(#cup-water)" opacity="0.9" />}
+      {level > 0 && <ellipse cx="36" cy={top} rx={26 - inset(top)} ry="2.5" fill="#d8eeff" opacity="0.8" />}
+      <ellipse cx="36" cy="10" rx="26" ry="3" fill="none" stroke="#1f2a44" strokeWidth="2" />
+      <path d="M17 16 L21 72" stroke="#ffffff" strokeWidth="4" strokeLinecap="round" opacity="0.8" />
+      <path d="M10 10 L62 10 L56 80 L16 80 Z" fill="none" stroke="#1f2a44" strokeWidth="2" strokeLinejoin="round" />
     </svg>
   );
 }

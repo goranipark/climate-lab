@@ -191,7 +191,9 @@ climate-lab/
 - [x] 연구소장 미션 브리핑(단계·탭마다 처음 한 번), ③ 단계 표시줄 옆 임무 표시
 - [x] 배지 조건(기록에서 계산) + 새 배지 알림, 테스트
 - [x] 배지 케이스(뚜껑 열기, 배지 끼우기, 칸마다 그림 조각) + 12개를 모으면 완성 그림 "되살아난 바다"
-- [ ] (Codex) 완성 그림 파일 — `docs/asset-requests.md` 묶음 D
+- [x] (Codex) SVG 그림 묶음 A~D — PR #1 (임시판)
+- [x] (11/6) 입체 수조·컵·육지 막대, 금속 배지 케이스·메달 배지 (Opus)
+- [ ] (11/6) 3D 그림: 교사가 ChatGPT로 생성(`docs/image-prompts.md`) → Codex가 WebP 변환·연결
 - [ ] (M3 담당 참고) ④ 화면에 임무 표시를 넣고 싶으면 `src/features/game/Mission.tsx`의 `<MissionChip id="cards" />`를 쓴다. 브리핑은 App이 자동으로 띄운다
 
 ### M3. ④ 영향 탐사 카드 (11/6~11/10) · 담당 GPT 6.1 (그림은 Codex) — concept.md 5.2, design.md 2.5·5.6·6.1, data.md 5장

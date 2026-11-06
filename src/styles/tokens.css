@@ -85,3 +85,19 @@ html[data-size="large"] {
   outline-offset: 2px;
 }
 html[data-size="large"] :focus-visible { outline-width: 4px; }
+
+/* 금속·입체 표현 (11/6 결정: 배지·배지 케이스·수조에만 그라데이션과 그림자 허용) */
+:root {
+  --metal-hi: #f7f9fb;
+  --metal-mid: #c3cad3;
+  --metal-lo: #8a94a1;
+  --metal-edge: #4b5563;
+  --gold-hi: #fff2b0;
+  --gold-mid: #f2c230;
+  --gold-lo: #b8860b;
+  --metal-face: linear-gradient(180deg, var(--metal-hi) 0%, #dfe4ea 30%, var(--metal-mid) 52%, var(--metal-lo) 56%, #d3d9e0 100%);
+  --metal-brush: repeating-linear-gradient(90deg, rgba(255, 255, 255, 0.18) 0 1px, rgba(0, 0, 0, 0.035) 1px 3px);
+  --gold-face: linear-gradient(180deg, var(--gold-hi), var(--gold-mid) 55%, var(--gold-lo));
+  --depth-1: 0 2px 4px rgba(31, 42, 68, 0.25);
+  --depth-2: 0 6px 14px rgba(31, 42, 68, 0.35);
+}
