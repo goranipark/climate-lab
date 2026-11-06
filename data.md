@@ -159,6 +159,8 @@ design.md 5.2의 표와 같다. 수조 그림을 고치면 이 표도 같이 고
 
 노트에 담기는 형식: `{title}: {what} {who}` (+ 학생이 쓴 한 줄은 `myNote`로 따로).
 
+화면 문구 묶음 `ui` (M3에서 추가): `life`·`env`·`local`(영역 이름), `temperature`·`precipitation`(현상 태그), `close`·`flip`(크게 보기 버튼), `unread`(아직 읽지 않은 카드 표시), `source`(출처 앞말), `empty`(담은 카드 필터가 비었을 때), `title`(카드 탭 이름).
+
 ### 5.2 영향 카드 10장
 
 **생활 (5장)**

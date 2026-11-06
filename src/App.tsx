@@ -150,10 +150,12 @@ function TabContent({ tab }: { tab: TabId }) {
   const { record } = useRecord();
   if (tab === 'write' && !isWriteUnlocked(record)) {
     const c = collectedCardCounts(record);
+    // 이미 ⑦을 열었거나 글을 쓴 적이 있는데 카드를 빼서 다시 잠긴 경우는 다른 안내 (쓴 글은 그대로 둔다)
+    const wasOpen = record.game.briefed.includes('write') || Object.values(record.writing.fields).some((v) => v.trim().length > 0);
     return (
       <section className="panel panel-center">
         <Lock aria-hidden size={40} />
-        <p className="subheading">{config.unlock.write.lockedMessage}</p>
+        <p className="subheading">{wasOpen ? config.unlock.write.relockedNotice : config.unlock.write.lockedMessage}</p>
         <p>{fill(cards.labels.progress, { life: c.life, env: c.env })}</p>
       </section>
     );
