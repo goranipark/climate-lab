@@ -59,6 +59,8 @@ export interface StudentRecord {
     avatar: string | null;
     issuedAt: string | null;
     badgesSeen: string[];
+    /** 배지 케이스에 넣는 모습을 이미 보여 준 배지 */
+    badgesPlaced: string[];
     briefed: string[];
   };
   writing: {
@@ -90,7 +92,7 @@ export function createEmptyRecord(student: Student, now = new Date().toISOString
     },
     cards: { flipped: [], myNotes: {}, localText: '' },
     notes: [],
-    game: { avatar: null, issuedAt: null, badgesSeen: [], briefed: [] },
+    game: { avatar: null, issuedAt: null, badgesSeen: [], badgesPlaced: [], briefed: [] },
     writing: { fields: { life: '', env: '', exp: '', extra: '' }, imports: {}, lastCheck: null },
   };
 }

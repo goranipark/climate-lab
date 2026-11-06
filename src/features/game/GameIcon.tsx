@@ -1,13 +1,13 @@
 // 게임 요소 아이콘: 연구 동료·배지를 검은 외곽선 스티커 모양으로 보여 준다
 import {
   Award, BadgeCheck, Bird, Camera, ClipboardCheck, Droplets, Eye, FileText, Fish, Globe, Layers, MapPin,
-  Microscope, NotebookPen, Rabbit, Search, Snail, Sparkles, Squirrel, Turtle, type LucideIcon,
+  Microscope, NotebookPen, Rabbit, Scale, Search, Snail, Sparkles, Squirrel, Turtle, type LucideIcon,
 } from 'lucide-react';
 import type { GameColor } from '../../types/data';
 
 const ICONS: Record<string, LucideIcon> = {
   Award, BadgeCheck, Bird, Camera, ClipboardCheck, Droplets, Eye, FileText, Fish, Globe, Layers, MapPin,
-  Microscope, NotebookPen, Rabbit, Search, Snail, Sparkles, Squirrel, Turtle,
+  Microscope, NotebookPen, Rabbit, Scale, Search, Snail, Sparkles, Squirrel, Turtle,
 };
 
 interface Props {

@@ -333,12 +333,14 @@ export interface GameData {
   ui: Record<
     | 'cardTitle' | 'issueTitle' | 'issueGuide' | 'issueButton' | 'issuedLabel' | 'classLabel' | 'signLabel'
     | 'openCard' | 'badgesTitle' | 'badgeCount' | 'badgeLocked' | 'badgeHow' | 'newBadge' | 'missionLabel'
-    | 'briefingStart' | 'close',
+    | 'briefingStart' | 'close' | 'caseTitle' | 'caseHint' | 'slotEmpty' | 'newBadgeHint' | 'completeTitle'
+    | 'completeText' | 'showPicture' | 'showBadges' | 'puzzleGuide',
     string
   >;
   avatars: { id: string; icon: string; label: string; color: GameColor }[];
   missions: Record<MissionId, { title: string; short: string; text: string }>;
   badges: Badge[];
+  puzzle: { title: string; image: string; alt: string };
 }
 
 export type MissionId = 'lab-predict' | 'lab-experiment' | 'lab-compare' | 'lab-real' | 'lab-summary' | 'cards' | 'write';

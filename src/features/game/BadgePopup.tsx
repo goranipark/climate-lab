@@ -36,6 +36,7 @@ export function BadgePopup() {
           <div>
             <p className="badge-pop-label">{game.ui.newBadge}</p>
             <p className="badge-pop-title">{badge.title}</p>
+            <p className="badge-pop-hint">{game.ui.newBadgeHint}</p>
           </div>
         </div>
       )}

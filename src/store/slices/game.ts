@@ -4,6 +4,7 @@ import type { StudentRecord } from '../../types/record';
 export type GameAction =
   | { type: 'GAME_ISSUE_CARD'; avatar: string; now?: string }
   | { type: 'GAME_BADGES_SEEN'; ids: string[] }
+  | { type: 'GAME_BADGES_PLACED'; ids: string[] }
   | { type: 'GAME_BRIEFED'; missionId: string };
 
 export function gameReducer(state: StudentRecord, action: GameAction): StudentRecord {
@@ -16,6 +17,11 @@ export function gameReducer(state: StudentRecord, action: GameAction): StudentRe
       const add = action.ids.filter((id) => !g.badgesSeen.includes(id));
       if (add.length === 0) return state;
       return { ...state, game: { ...g, badgesSeen: [...g.badgesSeen, ...add] } };
+    }
+    case 'GAME_BADGES_PLACED': {
+      const add = action.ids.filter((id) => !g.badgesPlaced.includes(id));
+      if (add.length === 0) return state;
+      return { ...state, game: { ...g, badgesPlaced: [...g.badgesPlaced, ...add] } };
     }
     case 'GAME_BRIEFED':
       if (g.briefed.includes(action.missionId)) return state;

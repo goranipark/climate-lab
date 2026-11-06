@@ -29,6 +29,12 @@
   --c-acrylic: #f4fbff;
   --c-trunk: #8a5a2b;
 
+  /* 배지 케이스 안감 (남색) */
+  --c-case: #1f2a44;
+  --c-case-slot: #2c3a5c;
+  --c-case-line: #6c7a99;
+  --c-case-text: #c8d0e0;
+
   /* 글자 */
   --font-base: "Pretendard Variable", Pretendard, "Noto Sans KR", system-ui, sans-serif;
   --fs-title: 3rem;

@@ -18,7 +18,7 @@ const RULES: Record<string, Rule> = {
       return r.lab.experiment.rows[cup]?.[model] === truthAt(Number(cup))[model];
     }),
   recorder: (r) => allRowsComplete(r),
-  classroom: (r) => r.lab.compare.classroom.done && (r.lab.compare.classroom.hasPhoto || r.lab.compare.classroom.memo.trim().length > 0),
+  comparer: (r) => r.lab.compare.diff.trim().length > 0,
   explorer: (r) => lab.real.scenes.every((s) => r.lab.real.seen.includes(s.id)),
   reporter: (r) => r.notes.filter((n) => n.source === 'lab-summary').length >= 2,
   'both-sides': (r) => {
@@ -43,4 +43,14 @@ export function newBadges(r: StudentRecord): string[] {
 /** 조건 함수가 없는 배지 id (데이터 검사·테스트용) */
 export function badgesWithoutRule(): string[] {
   return game.badges.filter((b) => !RULES[b.id]).map((b) => b.id);
+}
+
+/** 배지를 모두 모아 그림이 완성됐는지 */
+export function isPuzzleComplete(r: StudentRecord): boolean {
+  return earnedBadges(r).length === game.badges.length;
+}
+
+/** 받았지만 아직 케이스에 넣는 모습을 보여 주지 않은 배지 */
+export function unplacedBadges(r: StudentRecord): string[] {
+  return earnedBadges(r).filter((id) => !r.game.badgesPlaced.includes(id));
 }

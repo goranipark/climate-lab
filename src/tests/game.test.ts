@@ -2,7 +2,7 @@
 import { game } from '../types/data';
 import { createEmptyRecord, type StudentRecord } from '../types/record';
 import { reducer, type Action } from '../store/reducer';
-import { badgesWithoutRule, earnedBadges, newBadges } from '../features/game/badges';
+import { badgesWithoutRule, earnedBadges, isPuzzleComplete, newBadges, unplacedBadges } from '../features/game/badges';
 
 const run = (r: StudentRecord, ...a: Action[]) => a.reduce(reducer, r);
 const kid = () => createEmptyRecord({ class: 3, number: 12, name: 'K' });
@@ -58,5 +58,42 @@ describe('연구원증과 미션', () => {
   it('배지·캐릭터·미션 문구가 json에 모두 있다', () => {
     expect(game.badges.length).toBeGreaterThan(0);
     expect(game.avatars).toHaveLength(6);
+  });
+});
+
+describe('배지 케이스와 완성 그림', () => {
+  /** 모든 배지 조건을 채운 기록 */
+  function allDone(): StudentRecord {
+    let r = kid();
+    const note = (source: 'card' | 'local' | 'lab-summary', ref: string, area: 'life' | 'env' | 'local'): Action => ({
+      type: 'UPSERT_NOTE', note: { source, sourceRef: ref, kind: source === 'lab-summary' ? 'experiment' : source, area, text: ref, myNote: '' },
+    });
+    r = run(r, { type: 'LAB_PREDICT_SUBMIT' }, { type: 'LAB_OBSERVE_BEFORE' }, { type: 'LAB_POUR' });
+    r = run(r, { type: 'LAB_SET_ROW_STATE', cup: '1', model: 'house', state: 'none' }, { type: 'LAB_HINT_SHOWN', key: '1:house' });
+    for (const cup of ['1', '2', '3'] as const) {
+      const t = { '1': ['partial', 'none', 'none'], '2': ['full', 'partial', 'none'], '3': ['full', 'full', 'partial'] }[cup];
+      r = run(r,
+        { type: 'LAB_SET_ROW_STATE', cup, model: 'island', state: t[0] as never },
+        { type: 'LAB_SET_ROW_STATE', cup, model: 'house', state: t[1] as never },
+        { type: 'LAB_SET_ROW_STATE', cup, model: 'tree', state: t[2] as never },
+        { type: 'LAB_SET_ROW_OBSERVATION', cup, text: 'x' });
+    }
+    r = run(r, { type: 'LAB_COMPARE_DIFF', text: 'x' });
+    for (const s of ['tuvalu', 'maldives', 'tidal-flat']) r = run(r, { type: 'LAB_REAL_SEEN', sceneId: s });
+    r = run(r, note('lab-summary', 's1', 'life'), note('lab-summary', 's2', 'env'), note('card', 'flood', 'life'), note('card', 'bee', 'env'), note('local', 'local-taebaek', 'local'), note('card', 'glacier', 'env'));
+    for (const id of ['heat-cold', 'wildfire', 'typhoon', 'flood', 'food', 'tidal-flat', 'sea-forest', 'glacier', 'bee', 'mangrove']) r = run(r, { type: 'CARDS_FLIP', cardId: id });
+    return r;
+  }
+
+  it('모든 학생이 배지 12개를 다 모을 수 있다 (선택 활동 없이)', () => {
+    expect(earnedBadges(allDone())).toHaveLength(game.badges.length);
+    expect(isPuzzleComplete(allDone())).toBe(true);
+  });
+
+  it('케이스에 넣은 배지는 다시 넣는 움직임을 보여 주지 않는다', () => {
+    let r = run(kid(), { type: 'LAB_PREDICT_SUBMIT' });
+    expect(unplacedBadges(r)).toEqual(['predictor']);
+    r = run(r, { type: 'GAME_BADGES_PLACED', ids: ['predictor'] });
+    expect(unplacedBadges(r)).toEqual([]);
   });
 });

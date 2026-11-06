@@ -251,7 +251,8 @@ design.md 5.2의 표와 같다. 수조 그림을 고치면 이 표도 같이 고
 | `directorName` | 연구소장 이름. 기본 "연구소장". **선생님 이름으로 바꿔도 된다**(예: "박찬성 연구소장") |
 | `avatars` | 연구 동료 6개: `id`, lucide 아이콘 이름, 이름, 색(`life`/`env`/`exp`/`water`/`attn`/`land`) |
 | `missions` | 미션 브리핑 7개: `lab-predict`~`lab-summary`, `cards`, `write`. `title`(임무 n. …), `short`(한 줄), `text`(`{name}` 자리에 학생 이름) |
-| `badges` | 배지 12개: `id`, 아이콘, 색, 이름, 받는 방법. 받는 조건은 코드(`src/features/game/badges.ts`)에 있고, 배지 id마다 조건이 있는지 테스트로 확인 |
+| `badges` | 배지 12개: `id`, 아이콘, 색, 이름, 받는 방법. 받는 조건은 코드(`src/features/game/badges.ts`)에 있고, 배지 id마다 조건이 있는지 테스트로 확인. **배열 순서 = 배지 케이스 칸 순서**(왼쪽 위부터 4열) = 완성 그림 조각 순서 |
+| `puzzle` | 완성 그림 "되살아난 바다": `title`, `image`(빈칸이면 앱의 기본 그림, Codex 그림이 오면 `"images/puzzle/reborn-sea.svg"`), `alt` |
 
 배지를 추가하려면 `badges`에 한 줄을 넣고 `badges.ts`에 같은 id의 조건을 넣는다(조건이 없으면 테스트가 실패한다).
 
@@ -312,6 +313,7 @@ design.md 5.2의 표와 같다. 수조 그림을 고치면 이 표도 같이 고
     "avatar": "fish",                       // 고른 연구 동료
     "issuedAt": "2026-11-16T09:05:00+09:00",// 연구원증 발급일
     "badgesSeen": ["predictor", "observer"],// 이미 알려 준 배지 (배지 자체는 기록에서 계산)
+    "badgesPlaced": ["predictor"],          // 배지 케이스에 끼우는 모습을 이미 보여 준 배지
     "briefed": ["lab-predict", "lab-experiment"] // 이미 본 미션 브리핑
   },
   "writing": {

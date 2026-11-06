@@ -1,42 +1,42 @@
-// 내 연구원증과 배지 보기: 받은 배지는 색 스티커, 아직 받지 않은 배지는 회색과 받는 방법
+// 내 연구원증과 배지 케이스: 왼쪽 연구원증 + 고른 배지 설명, 오른쪽 배지 케이스(그림 조각 퍼즐)
+import { useState } from 'react';
+import { Check, Lock } from 'lucide-react';
 import { game } from '../../types/data';
-import { fill } from '../../lib/template';
 import { Modal } from '../../components/Modal';
 import { useRecord } from '../../store/RecordContext';
 import { ResearcherCard } from './ResearcherCard';
 import { GameSticker } from './GameIcon';
+import { BadgeCase } from './BadgeCase';
 import { earnedBadges } from './badges';
 import './game.css';
 
 export function ResearcherModal({ onClose }: { onClose: () => void }) {
   const { record } = useRecord();
+  const [selected, setSelected] = useState<string | null>(null);
   const earned = new Set(earnedBadges(record));
+  const badge = game.badges.find((b) => b.id === selected);
+
   return (
     <Modal onClose={onClose} labelledBy="researcher-title" title={game.ui.cardTitle} size="wide">
       <div className="researcher">
-        <ResearcherCard student={record.student} avatarId={record.game.avatar} issuedAt={record.game.issuedAt} />
-        <div className="badge-section">
-          <h3 className="badge-head">
-            {game.ui.badgesTitle} <span className="caption">{fill(game.ui.badgeCount, { count: earned.size })}</span>
-          </h3>
-          <ul className="badge-grid">
-            {game.badges.map((b, i) => {
-              const got = earned.has(b.id);
-              return (
-                <li key={b.id} className={`badge-item ${got ? '' : 'badge-off'}`}>
-                  <GameSticker icon={b.icon} color={b.color} size={2.75} locked={!got} tilt={got ? (i % 2 ? 5 : -5) : 0} />
-                  <span className="badge-title">{b.title}</span>
-                  {!got && (
-                    <span className="badge-how">
-                      <span className="sr-only">{game.ui.badgeLocked}. {game.ui.badgeHow}: </span>
-                      {b.how}
-                    </span>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
+        <div className="researcher-left">
+          <ResearcherCard student={record.student} avatarId={record.game.avatar} issuedAt={record.game.issuedAt} />
+          {badge && (
+            <div className="badge-detail" aria-live="polite">
+              <GameSticker icon={badge.icon} color={badge.color} size={3} locked={!earned.has(badge.id)} tilt={-6} />
+              <div>
+                <p className="badge-detail-title">
+                  {badge.title}{' '}
+                  {earned.has(badge.id) ? <Check aria-hidden size={16} /> : <Lock aria-hidden size={14} />}
+                </p>
+                <p className="badge-detail-how">
+                  <span className="field-label">{game.ui.badgeHow}</span> {badge.how}
+                </p>
+              </div>
+            </div>
+          )}
         </div>
+        <BadgeCase selected={selected} onSelect={setSelected} />
       </div>
     </Modal>
   );
