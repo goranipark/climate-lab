@@ -31,7 +31,7 @@
 
 /* 수조 그림 */
 .tank { display: block; width: 100%; height: auto; }
-.tank-main { background: var(--c-paper); border-radius: var(--r-card); }
+.tank-main { background: linear-gradient(180deg, #ffffff, #eef4f9); border-radius: var(--r-card); }
 .tank-small { background: var(--c-paper); border-radius: var(--r-item); }
 .tank-water { transition: none; }
 .tank-water-anim { transition: transform 1.2s ease-in-out; }
@@ -94,7 +94,7 @@
 .cup-lock { position: absolute; right: -0.25rem; top: -0.25rem; background: var(--c-paper); border-radius: 50%; }
 .stream {
   position: absolute; left: 10.3rem; top: 3.4rem; width: 0.625rem; border-radius: 0 0 0.3rem 0.3rem;
-  background: var(--c-water); animation: stream-in 0.3s ease-out;
+  background: linear-gradient(90deg, #8ccbff, #4da2ff 45%, #1d6fd6); opacity: 0.9; animation: stream-in 0.3s ease-out;
 }
 @keyframes stream-in { from { transform: scaleY(0); transform-origin: top; } to { transform: scaleY(1); transform-origin: top; } }
 .drop-hint {
@@ -109,14 +109,17 @@
 .dryland-label { font-size: var(--fs-caption); font-weight: 700; line-height: 1.25; text-align: center; }
 .dryland-track {
   position: relative; width: 3rem; height: 12.5rem; overflow: hidden;
-  border: 2px solid var(--c-ink); border-radius: 0.75rem; background: var(--c-paper);
+  border: 2px solid var(--c-case); border-radius: 0.75rem;
+  background: linear-gradient(90deg, #f4f9fd, #dbe9f4);
+  box-shadow: inset 0 2px 4px rgba(31, 42, 68, 0.25), 0 2px 4px rgba(31, 42, 68, 0.2);
 }
 .dryland-fill {
   position: absolute; left: 0; right: 0; bottom: 0; transition: height 1.2s ease-in-out;
   background-color: var(--c-land);
-  /* 자갈 점: 그라데이션 대신 작은 SVG 무늬 */
+  /* 자갈 점 무늬 + 입체감 (11/6 결정: 수조·배지에는 그라데이션 허용) */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10'%3E%3Ccircle cx='3' cy='3' r='1.6' fill='%23b89d63'/%3E%3Ccircle cx='8' cy='8' r='1.3' fill='%23b89d63'/%3E%3C/svg%3E");
-  border-top: 2px solid var(--c-ink);
+  border-top: 2px solid #5c4422;
+  box-shadow: inset 6px 0 8px rgba(255, 246, 220, 0.6), inset -6px 0 8px rgba(92, 68, 34, 0.35);
 }
 
 /* 가까이 보기 */
