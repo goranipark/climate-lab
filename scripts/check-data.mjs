@@ -90,6 +90,13 @@ const fieldIds = new Set(writing.fields.map((f) => f.id));
 if (writing.selfCheck.items.length !== 3) fail('자기 점검 항목은 3개여야 해요');
 for (const it of writing.selfCheck.items) if (!fieldIds.has(it.fieldId)) fail(`자기 점검 ${it.id}: 없는 칸 id "${it.fieldId}"`);
 
+// 반별 패들렛 주소: 반마다 하나씩, padlet.com 주소여야 한다
+for (let n = 1; n <= config.student.classCount; n++) {
+  const u = config.padlet?.urls?.[String(n)];
+  if (!u) fail(`config.json padlet.urls에 ${n}반 주소가 없어요`);
+  else if (!/^https:\/\/padlet\.com\//.test(u)) fail(`${n}반 패들렛 주소가 padlet.com 주소가 아니에요: ${u}`);
+}
+
 // game.json 검사: 배지·캐릭터 id 중복, 미션 키
 for (const list of ['badges', 'avatars']) {
   const seen = new Set();
@@ -120,7 +127,7 @@ const ALLOWED = new Set([
   '1991', '2000', '3.80', '2011', '2020', '4.27', '10', '2100', '0.63', '1.01', '2', '1', '1,200', '100', '20',
   '2023', '3', '25', '4', '8', '14', '2022', '3,000', '6', '5', '7', '8.5', '57', '92', '357', '361', '362',
 ]);
-const numberSkip = /(^config\.(storage|student|app)|\.url$)/;
+const numberSkip = /(^config\.(storage|student|app|padlet)|\.url$)/;
 for (const [path, s] of allStrings) {
   if (numberSkip.test(path)) continue;
   for (const n of s.match(/\d+(?:[.,]\d+)*/g) ?? []) {

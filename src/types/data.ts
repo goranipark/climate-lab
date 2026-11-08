@@ -100,6 +100,17 @@ export interface Config {
     placeholder: string;
     common: { confirm: string; cancel: string; close: string; next: string; prev: string };
   };
+  padlet: {
+    urls: Record<string, string>;
+    button: string;
+    copyTemplate: string;
+    tags: Record<'lab' | 'card' | 'write', string>;
+    guide: string;
+    copyFailTitle: string;
+    openPadlet: string;
+    hint: string;
+    buttonShort: string;
+  };
   bannedWords: { words: string[] };
 }
 
