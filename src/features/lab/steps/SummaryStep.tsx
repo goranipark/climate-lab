@@ -6,6 +6,7 @@ import { useRecord } from '../../../store/RecordContext';
 import { useFeedback } from '../../../components/Feedback';
 import { AreaTag } from '../../../components/AreaTag';
 import { noteId } from '../../../store/reducer';
+import { PadletShare } from '../../../components/PadletShare';
 
 export function SummaryStep() {
   const { record, dispatch } = useRecord();
@@ -58,7 +59,15 @@ export function SummaryStep() {
           {S.saveLabel}
         </button>
       </div>
-      {saved && <p className="closing">{S.closing}</p>}
+      {saved && (
+        <>
+          {/* 정리 문장 두 개를 우리 반 패들렛 내 번호 칸에 올린다 */}
+          <div className="row-end summary-share">
+            <PadletShare tag="lab" text={S.sentences.map((x) => fill(S.noteTemplate, { text: sum[x.id].trim() })).join('\n')} />
+          </div>
+          <p className="closing">{S.closing}</p>
+        </>
+      )}
     </div>
   );
 }

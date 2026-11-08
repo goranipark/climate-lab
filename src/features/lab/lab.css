@@ -201,3 +201,4 @@
 html[data-size="large"] .lab-split, html[data-size="large"] .exp { grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); }
 html[data-size="large"] .exp-stage { grid-template-columns: minmax(0, 1fr) 4.25rem; }
 html[data-size="large"] .state-pill { height: 2rem; }
+.summary-share { margin-top: 0; }

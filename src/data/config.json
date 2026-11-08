@@ -7,7 +7,7 @@
   },
   "student": {
     "classCount": 6,
-    "maxNumber": 35,
+    "maxNumber": 20,
     "nameMinLength": 2,
     "nameMaxLength": 10,
     "teacherOption": {
@@ -173,5 +173,28 @@
       "완화",
       "적응"
     ]
+  },
+  "padlet": {
+    "_설명": "반별 패들렛(과학 수업 복습 한 줄). 학생은 자기 번호 칸에 붙여 넣는다. 앱은 글을 복사하고 패들렛을 새 탭으로 열기만 한다(API 키 없음, 11/8 결정).",
+    "urls": {
+      "1": "https://padlet.com/goranipark/1-qea0zkaikbsgfiip",
+      "2": "https://padlet.com/goranipark/2-ps9rqk93grplvsdd",
+      "3": "https://padlet.com/goranipark/3-9ud73rb762of19yz",
+      "4": "https://padlet.com/goranipark/4-2elt66zmzw8q9thg",
+      "5": "https://padlet.com/goranipark/5-sv40zlvjwqbvdtaa",
+      "6": "https://padlet.com/goranipark/6-nbz5p5poxss5wg12"
+    },
+    "button": "우리 반 패들렛에 올리기",
+    "copyTemplate": "[{date} {tag}]\n{text}",
+    "tags": {
+      "lab": "③ 실험 정리",
+      "card": "④ 영향 카드",
+      "write": "⑦ 탐사 보고서"
+    },
+    "guide": "글을 복사했어요. 패들렛의 {number}번 칸에서 +를 누르고 붙여 넣으세요. 제목은 오늘 날짜({date})로 써요.",
+    "copyFailTitle": "아래 글을 복사해서 패들렛에 붙여 넣으세요",
+    "openPadlet": "패들렛 열기",
+    "hint": "패들렛 {number}번 칸에 붙여 넣어요",
+    "buttonShort": "패들렛 {number}번 칸에 올리기"
   }
 }

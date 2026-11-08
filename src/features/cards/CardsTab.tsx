@@ -7,6 +7,7 @@ import { useRecord } from '../../store/RecordContext';
 import { noteId } from '../../store/reducer';
 import { collectedCardCounts } from '../../store/selectors';
 import { fill } from '../../lib/template';
+import { PadletShare } from '../../components/PadletShare';
 import './cards.css';
 
 type Filter = 'all' | 'life' | 'env' | 'collected';
@@ -110,6 +111,8 @@ function CardDetail({ card, onClose }: { card: Card; onClose: () => void }) {
     </div>
     <footer className="cards-detail-actions">
       <button type="button" className="btn btn-ghost btn-sm" onClick={() => setBack((v) => !v)}><RotateCw size={16} aria-hidden />{data.ui.flip}</button>
+      {/* 교사 요청(11/8): 담은 카드에 내 생각을 썼으면 우리 반 패들렛에 올릴 수 있다 */}
+      {back && saved && text.trim() && <PadletShare tag="card" size="sm" text={local ? fill(data.localCard.noteTemplate, { text: text.trim() }) : `${card.title}: ${text.trim()}`} />}
       {back && <button type="button" className="btn btn-primary btn-sm" disabled={!saved && !canCollect} title={!read ? data.labels.readFirst : undefined} onClick={toggleCollected}>{saved ? data.labels.collectedLabel : data.labels.collectLabel}</button>}
     </footer>
   </dialog>;

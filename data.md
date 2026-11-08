@@ -58,8 +58,9 @@
 
 | 키 | 값 | 설명 |
 | --- | --- | --- |
-| `student.classCount` | `6` | 시작 화면 반 선택지(1반~6반). **학교 학급 수에 맞게 바꿔 주세요** |
-| `student.maxNumber` | `35` | 번호 최댓값 |
+| `student.classCount` | `6` | 시작 화면 반 선택지(1반~6반). 11/8 확인: 6반 |
+| `student.maxNumber` | `20` | 번호 최댓값 (2반이 20번까지) |
+| `padlet` | 반별 주소 6개, 버튼·안내 문구, 글 틀 `[{date} {tag}]` | 우리 반 패들렛에 올리기 (concept.md 5.6). 주소가 바뀌면 `padlet.urls`만 고친다 |
 | `student.teacherOption` | 사용 | 반 목록 맨 아래 "교사 (시연 모드)". 모든 잠금 해제, 기록은 `teacherKey`에 따로 저장 |
 | `storage.*` | — | 저장 키 규칙(7장) |
 | `areas` | life/env/exp/local | 화면 이름, 아이콘(lucide 이름), 안내 문구 |
