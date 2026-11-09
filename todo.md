@@ -194,7 +194,8 @@ climate-lab/
 - [x] 배지 케이스(뚜껑 열기, 배지 끼우기, 칸마다 그림 조각) + 12개를 모으면 완성 그림 "되살아난 바다"
 - [x] (Codex) SVG 그림 묶음 A~D — PR #1 (임시판)
 - [x] (11/6) 입체 수조·컵·육지 막대, 금속 배지 케이스·메달 배지 (Opus)
-- [ ] (11/6) 3D 그림: 교사가 ChatGPT로 생성(`docs/image-prompts.md`) → Codex가 WebP 변환·연결
+- [x] (11/9) 3D 그림 15장: 교사가 ChatGPT로 생성 → Opus가 WebP 변환·연결 (Codex 대신, 11/12 일정 때문)
+- [ ] 몰디브(사람이 물에 잠긴 모습)·빙하(폭포처럼 보임) 다시 생성 → 같은 이름 WebP로 교체 (`docs/image-prompts.md` 8장)
 - [ ] (M3 담당 참고) ④ 화면에 임무 표시를 넣고 싶으면 `src/features/game/Mission.tsx`의 `<MissionChip id="cards" />`를 쓴다. 브리핑은 App이 자동으로 띄운다
 
 ### M3. ④ 영향 탐사 카드 (11/6~11/10) · 담당 GPT 6.1 (그림은 Codex) — concept.md 5.2, design.md 2.5·5.6·6.1, data.md 5장

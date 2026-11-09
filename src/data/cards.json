@@ -30,7 +30,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/heat-cold.svg",
+      "image": "images/cards/heat-cold.webp",
       "imageAlt": "뜨거운 해 아래에서 땀을 닦는 사람"
     },
     {
@@ -47,7 +47,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/wildfire.svg",
+      "image": "images/cards/wildfire.webp",
       "imageAlt": "숲 가장자리에 있는 마을과 연기가 피어오르는 산"
     },
     {
@@ -64,7 +64,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/typhoon.svg",
+      "image": "images/cards/typhoon.webp",
       "imageAlt": "바람에 크게 휘어진 나무와 바닷가 집"
     },
     {
@@ -81,7 +81,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/flood.svg",
+      "image": "images/cards/flood.webp",
       "imageAlt": "물에 잠긴 길과 집 앞에 서 있는 우산 쓴 사람"
     },
     {
@@ -98,7 +98,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/food.svg",
+      "image": "images/cards/food.webp",
       "imageAlt": "갈라진 밭과 시든 농작물 옆에 놓인 빈 그릇"
     },
     {
@@ -115,7 +115,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/tidal-flat.svg",
+      "image": "images/cards/tidal-flat.webp",
       "imageAlt": "갯벌 위의 게와 조개, 그 위를 나는 새"
     },
     {
@@ -133,7 +133,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/sea-forest.svg",
+      "image": "images/cards/sea-forest.webp",
       "imageAlt": "바닷속 해조류 사이를 헤엄치는 물고기"
     },
     {
@@ -150,7 +150,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/glacier.svg",
+      "image": "images/cards/glacier.webp",
       "imageAlt": "산골짜기에 남은 작은 빙하"
     },
     {
@@ -168,7 +168,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/bee.svg",
+      "image": "images/cards/bee.webp",
       "imageAlt": "꽃 위에 앉은 꿀벌 한 마리"
     },
     {
@@ -185,7 +185,7 @@
       ],
       "recentExample": "",
       "recentSourceText": "",
-      "image": "images/cards/mangrove.svg",
+      "image": "images/cards/mangrove.webp",
       "imageAlt": "물 위로 뿌리를 내린 맹그로브 나무와 그 사이의 작은 물고기"
     }
   ],
@@ -204,7 +204,7 @@
     "sourceIds": [
       "kma-climate"
     ],
-    "image": "images/cards/local-taebaek.svg",
+    "image": "images/cards/local-taebaek.webp",
     "imageAlt": "지도 위에 꽂힌 핀"
   },
   "closing": "생활과 환경 모두에 영향이 있다는 것을 알았어요. 우리가 할 수 있는 일도 함께 생각해 봐요.",
