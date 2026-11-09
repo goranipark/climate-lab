@@ -99,7 +99,7 @@ export function BadgeCase({ onSelect, selected }: Props) {
                   {got && <Piece index={i} />}
                   {got ? (
                     <span className="slot-badge">
-                      <GameSticker icon={b.icon} color={b.color} size={3} tilt={i % 2 ? 6 : -6} />
+                      <GameSticker icon={b.icon} color={b.color} size={3} tilt={i % 2 ? 6 : -6} image={b.image} />
                     </span>
                   ) : (
                     <span className="slot-empty">

@@ -145,7 +145,7 @@
     "levels": [
       {
         "cup": 0,
-        "water": 0.12,
+        "water": 0.1,
         "dryLand": 1.0,
         "states": {
           "island": "none",
@@ -156,7 +156,7 @@
       },
       {
         "cup": 1,
-        "water": 0.3,
+        "water": 0.27,
         "dryLand": 0.78,
         "states": {
           "island": "partial",
@@ -167,7 +167,7 @@
       },
       {
         "cup": 2,
-        "water": 0.48,
+        "water": 0.44,
         "dryLand": 0.52,
         "states": {
           "island": "full",
@@ -178,7 +178,7 @@
       },
       {
         "cup": 3,
-        "water": 0.66,
+        "water": 0.61,
         "dryLand": 0.28,
         "states": {
           "island": "full",
@@ -319,5 +319,11 @@
     "saveLabel": "근거 노트에 담기",
     "noteTemplate": "해수면이 상승하면 {text}",
     "closing": "무엇이 잠기는지 알았으니, 이제 우리가 할 수 있는 일도 찾아볼 수 있어요."
+  },
+  "art": {
+    "_설명": "3D 그림(11/9 결정). tank는 물을 뺀 수조 바탕(유리 상자·자갈·섬·집·나무) 한 장. 물은 코드가 그 위에 그린다. 그림이 들어오면 tank/geometry.ts의 좌표를 그림에 맞춘다. 빈칸이면 코드로 그린 수조를 쓴다.",
+    "tank": "images/lab/tank.webp",
+    "tankAlt": "유리 수조 안에 자갈 언덕과 섬, 집, 나무 모형이 놓인 모습",
+    "cup": "images/lab/cup.webp"
   }
 }

@@ -32,7 +32,7 @@ export function BadgePopup() {
     <div className="badge-pop-zone" aria-live="polite">
       {badge && (
         <div className="badge-pop" key={badge.id}>
-          <GameSticker icon={badge.icon} color={badge.color} size={3.25} tilt={-8} />
+          <GameSticker icon={badge.icon} color={badge.color} size={3.25} tilt={-8} image={badge.image} />
           <div>
             <p className="badge-pop-label">{game.ui.newBadge}</p>
             <p className="badge-pop-title">{badge.title}</p>

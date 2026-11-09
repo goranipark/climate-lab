@@ -196,6 +196,8 @@ climate-lab/
 - [x] (11/6) 입체 수조·컵·육지 막대, 금속 배지 케이스·메달 배지 (Opus)
 - [x] (11/9) 3D 그림 15장: 교사가 ChatGPT로 생성 → Opus가 WebP 변환·연결 (Codex 대신, 11/12 일정 때문)
 - [x] 몰디브(사람 없이)·빙하(얼음덩어리) 다시 생성해 교체 (11/9, `docs/image-prompts.md` 8장)
+- [x] (11/9) 배지·연구 동료·연구소장·수조·컵 그림 자리(json `image`/`art` 칸)와 프롬프트(`docs/image-prompts.md` 9·10장)
+- [x] (11/9) 배지 12·동료 6·연구소장 1·수조·컵 3D 그림 연결(WebP, `public/images/game/`·`lab/`). 수조 좌표를 그림에 맞추고 물 높이를 0.10·0.27·0.44·0.61로 조정(집 받침이 컵 1잔에 젖지 않게)
 - [ ] (M3 담당 참고) ④ 화면에 임무 표시를 넣고 싶으면 `src/features/game/Mission.tsx`의 `<MissionChip id="cards" />`를 쓴다. 브리핑은 App이 자동으로 띄운다
 
 ### M3. ④ 영향 탐사 카드 (11/6~11/10) · 담당 GPT 6.1 (그림은 Codex) — concept.md 5.2, design.md 2.5·5.6·6.1, data.md 5장

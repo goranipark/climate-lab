@@ -307,6 +307,8 @@ function PastRows({ current, onPick }: { current: CupKey | null; onPick: (cup: C
 
 /** 컵 그림: 유리컵 느낌(반사광·두께). level은 컵 안 물의 양(0~1) */
 function CupSvg({ level }: { level: number }) {
+  // 3D 컵 그림이 있으면 그림으로 (기울기 움직임은 버튼이 맡는다)
+  if (lab.art.cup) return <img src={lab.art.cup} alt="" aria-hidden className="cup-img" draggable={false} style={{ opacity: level > 0 ? 1 : 0.85 }} />;
   const top = 22 + (1 - level) * 52;
   const inset = (y: number) => (y - 10) * 0.085;
   return (

@@ -227,6 +227,7 @@ export interface LabData {
     }[];
     commonFactIds: string[];
   };
+  art: { tank: string; tankAlt: string; cup: string };
   facts: Fact[];
   summary: {
     prefix: string;
@@ -339,6 +340,8 @@ export type GameColor = 'life' | 'env' | 'exp' | 'water' | 'attn' | 'land';
 export interface Badge {
   id: string;
   icon: string;
+  /** 3D 그림 경로 (빈칸이면 아이콘 메달) */
+  image: string;
   color: GameColor;
   title: string;
   how: string;
@@ -353,7 +356,8 @@ export interface GameData {
     | 'completeText' | 'showPicture' | 'showBadges' | 'puzzleGuide',
     string
   >;
-  avatars: { id: string; icon: string; label: string; color: GameColor }[];
+  avatars: { id: string; icon: string; label: string; color: GameColor; image: string }[];
+  directorImage: string;
   missions: Record<MissionId, { title: string; short: string; text: string }>;
   badges: Badge[];
   puzzle: { title: string; image: string; alt: string };

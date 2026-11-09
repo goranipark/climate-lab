@@ -9,6 +9,9 @@ import './game.css';
 
 /** 연구소장 얼굴 스티커 */
 function Director({ size = 3 }: { size?: number }) {
+  if (game.directorImage) {
+    return <img src={game.directorImage} alt="" aria-hidden className="director-img" style={{ width: `${size}rem`, height: `${size}rem` }} />;
+  }
   return (
     <span className="director" style={{ width: `${size}rem`, height: `${size}rem` }} aria-hidden>
       <Microscope size={`${size * 0.55}rem`} strokeWidth={2.2} />

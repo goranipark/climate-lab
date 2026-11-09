@@ -19,10 +19,24 @@ interface Props {
   locked?: boolean;
   tilt?: number;
   label?: string;
+  /** 3D 그림 경로. 있으면 아이콘 대신 그림을 쓰고, 잠긴 배지는 회색 실루엣으로 */
+  image?: string;
 }
 
-export function GameSticker({ icon, color, size = 3, locked = false, tilt = 0, label }: Props) {
+export function GameSticker({ icon, color, size = 3, locked = false, tilt = 0, label, image }: Props) {
   const Icon = ICONS[icon] ?? Award;
+  if (image) {
+    return (
+      <img
+        src={image}
+        alt={label ?? ''}
+        aria-hidden={label ? undefined : true}
+        className={`sticker-img ${locked ? 'is-locked' : ''}`}
+        style={{ width: `${size}rem`, height: `${size}rem`, transform: tilt ? `rotate(${tilt}deg)` : undefined }}
+        draggable={false}
+      />
+    );
+  }
   return (
     <span
       className={`sticker-badge sb-${locked ? 'locked' : color}`}

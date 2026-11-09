@@ -115,6 +115,11 @@ const images = [
   [`cards.json localCard`, cards.localCard.image],
   ...lab.real.scenes.map((sc) => [`lab.json ${sc.id}`, sc.image]),
   ['game.json puzzle', game.puzzle.image],
+  ['game.json directorImage', game.directorImage],
+  ...game.badges.map((b) => [`game.json badge ${b.id}`, b.image]),
+  ...game.avatars.map((a) => [`game.json avatar ${a.id}`, a.image]),
+  ['lab.json art.tank', lab.art.tank],
+  ['lab.json art.cup', lab.art.cup],
 ];
 for (const [where, img] of images) {
   if (!img) continue;
