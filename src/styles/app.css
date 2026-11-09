@@ -134,6 +134,7 @@ select.input { padding-right: var(--sp-2); }
 
 .app-body { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0, 1fr) var(--w-note); position: relative; }
 .app-body.notes-off { grid-template-columns: minmax(0, 1fr) 3rem; }
+.app-body.notes-hidden { grid-template-columns: minmax(0, 1fr); }
 .content { min-width: 0; min-height: 0; overflow: auto; padding: var(--sp-4) var(--sp-6); }
 
 /* 탭 본문 공용 판 */
