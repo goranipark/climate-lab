@@ -3,7 +3,7 @@
 import { useId, type KeyboardEvent, type ReactNode } from 'react';
 import { lab, type ModelId, type StateId } from '../../../types/data';
 import { fill } from '../../../lib/template';
-import { BOX, groundY, MODEL_BOX, SLOPE, VIEW_H, VIEW_W, waterYAt } from './geometry';
+import { ART_RECT, BOX, groundY, MODEL_BOX, SLOPE, VIEW_H, VIEW_W, waterYAt } from './geometry';
 import { modelLabel } from '../labLogic';
 
 /** 자갈 알갱이 위치 (매번 같은 모양이 나오도록 고정된 값으로 만든다) */
@@ -141,7 +141,7 @@ export function TankSvg({ cups, animate = false, onModel, viewBox, stickers = []
         </filter>
       </defs>
 
-      {art && <image href={art} x="0" y="0" width={VIEW_W} height={VIEW_H} preserveAspectRatio="none" />}
+      {art && <image href={art} x={ART_RECT.x} y={ART_RECT.y} width={ART_RECT.w} height={ART_RECT.h} preserveAspectRatio="none" />}
 
       {/* 책상 위 그림자 */}
       {!art && <ellipse cx={VIEW_W / 2} cy={BOX.bottom + 9} rx={BOX.w / 2 + 4} ry="7" fill="#1f2a44" opacity="0.22" filter={url('blur')} />}
