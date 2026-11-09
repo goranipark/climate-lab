@@ -232,7 +232,7 @@
       {
         "id": "tuvalu",
         "title": "투발루",
-        "image": "images/scenes/tuvalu.svg",
+        "image": "images/scenes/tuvalu.webp",
         "imageAlt": "낮고 평평한 섬의 길과 집 아래쪽까지 바닷물이 들어온 모습을 상상해 그린 그림",
         "what": "낮은 섬의 길과 집, 밭",
         "who": "섬에 사는 사람들이 집과 밭을 잃어요.",
@@ -244,7 +244,7 @@
       {
         "id": "maldives",
         "title": "몰디브",
-        "image": "images/scenes/maldives.svg",
+        "image": "images/scenes/maldives.webp",
         "imageAlt": "작은 섬 여러 개의 바닷가 마을과 선착장 일부가 잠긴 모습을 상상해 그린 그림",
         "what": "작은 섬의 바닷가 마을과 선착장",
         "who": "섬마을 사람들이 살 곳과 배를 대는 곳을 잃어요.",
@@ -256,7 +256,7 @@
       {
         "id": "tidal-flat",
         "title": "갯벌",
-        "image": "images/scenes/tidal-flat.svg",
+        "image": "images/scenes/tidal-flat.webp",
         "imageAlt": "넓은 갯벌 대부분이 바닷물에 덮여 게와 조개, 새가 쉴 곳이 줄어든 모습을 상상해 그린 그림",
         "what": "넓은 갯벌",
         "who": "갯벌에 사는 게와 조개, 그것을 먹는 새가 살 곳을 잃어요.",
