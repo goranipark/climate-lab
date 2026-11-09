@@ -4,3 +4,5 @@ qr/
 .vercel/
 .DS_Store
 *.log
+
+screenshots/

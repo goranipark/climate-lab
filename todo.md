@@ -114,7 +114,7 @@ climate-lab/
 ### M0. 프로젝트 준비 (11/5)
 
 - [x] Vite React TS 프로젝트 만들기, 위 폴더 구조로 정리, `index.html`에 `lang="ko"`, 제목 "기후변화 탐사 연구소"
-- [x] 패키지 설치: `react react-dom lucide-react lz-string pretendard` / 개발용 `typescript vite @vitejs/plugin-react vitest @testing-library/react @testing-library/jest-dom jsdom qrcode` (`vite-plugin-pwa`는 M4에서 추가, Playwright는 개발 컴퓨터에 설치된 것을 씀)
+- [x] 패키지 설치: `react react-dom lucide-react lz-string pretendard` / 개발용 `typescript vite @vitejs/plugin-react vitest @testing-library/react @testing-library/jest-dom jsdom qrcode` (`vite-plugin-pwa`는 M4에서 추가, 화면 검사는 `playwright-core`로 개발 컴퓨터의 Edge/Chrome을 씀)
 - [x] `package.json` 스크립트
 
   | 이름 | 하는 일 |
@@ -225,10 +225,10 @@ climate-lab/
 
 ### M4. 1차 배포 + 리허설 (11/11~11/13) · 도구 GPT 6.1, 배포 Opus — 6장, concept.md 9장
 
-- [ ] `vite-plugin-pwa` 설정(정적 파일 미리 저장, 자동 업데이트). 업데이트가 있으면 다음 접속에서 반영
+- [x] (11/9) `vite-plugin-pwa` 0.21.1 설정(정적 파일 153개·약 4.3MB 미리 저장, `autoUpdate`). 새 버전은 서비스 워커만 바로 바꾸고 보는 화면은 새로고침하지 않아, 다음에 열거나 새로고침할 때 반영된다
 - [x] GitHub Pages 자동 배포 워크플로(6장, 11/6 Vercel에서 변경) — 11/9 첫 배포 성공 (https://goranipark.github.io/climate-lab/)
-- [ ] `scripts/screen-check.mjs`: Playwright로 1366×630에서 ③ 각 단계·④ 화면을 열어 세로 스크롤이 없는지 확인하고 스크린샷 저장. 1920×1080 + 큰 글자 모드도 같은 검사
-- [ ] `scripts/make-qr.mjs`: 배포 주소 + `?class=1~N` QR PNG를 `qr/`에 만들기 (`npm run qr -- https://배포주소`)
+- [x] (11/9) `scripts/screen-check.mjs`: 매번 새로 빌드 → 1366×630과 1920×1080 큰 글자 모드에서 시작·③ 5단계·④·⑦ 세로 스크롤 검사, `screenshots/`에 저장. 서비스 워커가 맡은 뒤 인터넷을 끊고 새로고침하는 검사도 함께. 브라우저는 `playwright-core` + 컴퓨터의 Edge/Chrome(`CHROMIUM_PATH`로 바꿀 수 있음)
+- [x] (11/9) `scripts/make-qr.mjs`: 배포 주소 + `?class=1~N` QR PNG를 `qr/`에 만들기 (`npm run qr`, 다른 주소는 `npm run qr -- https://주소/`). A4 인쇄용 `qr/index.html`(2열×3행)도 만든다
 - [ ] concept.md 9장 완료 기준 중 ③④·저장 항목 직접 확인
 - [ ] **교사 리허설(11/13)**: 실제 크롬북 1대 + 전자칠판에서
   - [ ] QR로 접속 → 시작 → ③ 5단계 끝까지 → ④ 카드 2장 담기 → 내보내기 코드 패들렛에 붙이기
