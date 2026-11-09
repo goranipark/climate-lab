@@ -326,6 +326,11 @@ export interface WritingData {
   output: Record<'printLabel' | 'copyLabel' | 'copiedToast' | 'printHeader' | 'copyTemplate' | 'printTooLong', string>;
   teacherExample: Record<WritingField['id'], string>;
   closing: string;
+  ui: Record<
+    | 'notesTitle' | 'notesHint' | 'suggestLabel' | 'notesEmpty' | 'insertLabel' | 'extraOpen' | 'checkTitle'
+    | 'checkHint' | 'teacherExample' | 'exampleTitle' | 'previewTitle' | 'dateLabel' | 'nameLine',
+    string
+  >;
 }
 
 /** 게임 요소 색 이름 (토큰과 연결) */

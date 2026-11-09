@@ -121,11 +121,14 @@ function Main({ large, onToggleLarge, onSignOut, onReplace }: MainProps) {
   return (
     <div className="app">
       <TopBar tab={tab} onTab={setTab} large={large} onToggleLarge={onToggleLarge} onMenu={onMenu} onResearcher={() => setDialog('researcher')} />
-      <div className={`app-body ${notesCollapsed ? 'notes-off' : ''}`}>
+      <div className={`app-body ${tab === 'write' && writeOpen ? 'notes-hidden' : notesCollapsed ? 'notes-off' : ''}`}>
         <main className="content" id="content">
           <TabContent tab={tab} />
         </main>
-        <NotesPanel collapsed={notesCollapsed} onToggle={() => setNotesCollapsed((v) => !v)} overlay={large && !notesCollapsed} />
+        {/* ⑦에서는 근거 노트를 글쓰기 화면 왼쪽에 넓게 보여 주므로 오른쪽 패널은 숨긴다 */}
+        {!(tab === 'write' && writeOpen) && (
+          <NotesPanel collapsed={notesCollapsed} onToggle={() => setNotesCollapsed((v) => !v)} overlay={large && !notesCollapsed} />
+        )}
       </div>
       {dialog === 'export' && <ExportDialog onClose={() => setDialog(null)} />}
       {dialog === 'researcher' && <ResearcherModal onClose={() => setDialog(null)} />}
