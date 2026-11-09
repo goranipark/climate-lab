@@ -223,7 +223,7 @@ climate-lab/
 ### M4. 1차 배포 + 리허설 (11/11~11/13) · 도구 GPT 6.1, 배포 Opus — 6장, concept.md 9장
 
 - [ ] `vite-plugin-pwa` 설정(정적 파일 미리 저장, 자동 업데이트). 업데이트가 있으면 다음 접속에서 반영
-- [x] GitHub Pages 자동 배포 워크플로(6장, 11/6 Vercel에서 변경)
+- [x] GitHub Pages 자동 배포 워크플로(6장, 11/6 Vercel에서 변경) — 11/9 첫 배포 성공 (https://goranipark.github.io/climate-lab/)
 - [ ] `scripts/screen-check.mjs`: Playwright로 1366×630에서 ③ 각 단계·④ 화면을 열어 세로 스크롤이 없는지 확인하고 스크린샷 저장. 1920×1080 + 큰 글자 모드도 같은 검사
 - [ ] `scripts/make-qr.mjs`: 배포 주소 + `?class=1~N` QR PNG를 `qr/`에 만들기 (`npm run qr -- https://배포주소`)
 - [ ] concept.md 9장 완료 기준 중 ③④·저장 항목 직접 확인
