@@ -256,3 +256,9 @@
 .badge-pop { box-shadow: var(--depth-2); }
 .id-card { box-shadow: var(--depth-1); }
 .id-band { background: linear-gradient(180deg, #2b3446, var(--c-ink)); }
+
+/* 3D 그림 배지·동료·연구소장 (11/9): 그림 자체가 메달이라 테두리 없이 그림자만 */
+.sticker-img { display: block; flex: none; object-fit: contain; filter: drop-shadow(0 3px 4px rgba(31, 42, 68, 0.35)); }
+.sticker-img.is-locked { filter: grayscale(1) brightness(1.15) opacity(0.45); }
+.slot-on .slot-badge .sticker-img { filter: drop-shadow(0 6px 8px rgba(0, 0, 0, 0.5)); }
+.director-img { display: block; flex: none; object-fit: contain; border-radius: 50%; }

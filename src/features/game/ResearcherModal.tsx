@@ -23,7 +23,7 @@ export function ResearcherModal({ onClose }: { onClose: () => void }) {
           <ResearcherCard student={record.student} avatarId={record.game.avatar} issuedAt={record.game.issuedAt} />
           {badge && (
             <div className="badge-detail" aria-live="polite">
-              <GameSticker icon={badge.icon} color={badge.color} size={3} locked={!earned.has(badge.id)} tilt={-6} />
+              <GameSticker icon={badge.icon} color={badge.color} size={3} locked={!earned.has(badge.id)} tilt={-6} image={badge.image} />
               <div>
                 <p className="badge-detail-title">
                   {badge.title}{' '}

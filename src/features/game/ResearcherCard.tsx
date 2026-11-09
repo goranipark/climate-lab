@@ -22,7 +22,7 @@ export function ResearcherCard({ student, avatarId, issuedAt }: Props) {
     <div className="id-card">
       <div className="id-band">{game.ui.cardTitle}</div>
       <div className="id-body">
-        <GameSticker icon={avatar.icon} color={avatar.color} size={4.5} tilt={-6} label={avatar.label} />
+        <GameSticker icon={avatar.icon} color={avatar.color} size={4.5} tilt={-6} label={avatar.label} image={avatar.image} />
         <div className="id-info">
           <span className="id-name">{student.name}</span>
           <span className="id-class">{fill(game.ui.classLabel, { class: student.class, number: student.number })}</span>

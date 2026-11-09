@@ -51,11 +51,14 @@ export function TankSvg({ cups, animate = false, onModel, viewBox, stickers = []
   const id = (name: string) => `${name}-${uid}`;
   const url = (name: string) => `url(#${id(name)})`;
   const surface = waterYAt(cups);
+  // 3D 수조 그림이 있으면 바탕·모형은 그림으로, 물만 코드로 그린다 (11/9 결정)
+  const art = lab.art.tank;
   const landPath = `M${BOX.x} ${SLOPE.y1} L${SLOPE.x1} ${SLOPE.y1} L${SLOPE.x2} ${SLOPE.y2} L${BOX.x + BOX.w} ${SLOPE.y2} L${BOX.x + BOX.w} ${BOX.bottom} L${BOX.x} ${BOX.bottom} Z`;
 
   // 모형을 감싸는 누를 수 있는 묶음
-  const modelGroup = (mid: ModelId, children: ReactNode) => {
+  const modelGroup = (mid: ModelId, drawn: ReactNode) => {
     const b = MODEL_BOX[mid];
+    const children = art ? null : drawn;
     if (!onModel) return <g key={mid}>{children}</g>;
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'Enter' || e.key === ' ') {
@@ -138,18 +141,20 @@ export function TankSvg({ cups, animate = false, onModel, viewBox, stickers = []
         </filter>
       </defs>
 
+      {art && <image href={art} x="0" y="0" width={VIEW_W} height={VIEW_H} preserveAspectRatio="none" />}
+
       {/* 책상 위 그림자 */}
-      <ellipse cx={VIEW_W / 2} cy={BOX.bottom + 9} rx={BOX.w / 2 + 4} ry="7" fill="#1f2a44" opacity="0.22" filter={url('blur')} />
+      {!art && <ellipse cx={VIEW_W / 2} cy={BOX.bottom + 9} rx={BOX.w / 2 + 4} ry="7" fill="#1f2a44" opacity="0.22" filter={url('blur')} />}
 
       {/* 아크릴 상자 안쪽 */}
-      <rect x={BOX.x} y={BOX.y} width={BOX.w} height={BOX.h} rx="8" fill={url('air')} />
+      {!art && <rect x={BOX.x} y={BOX.y} width={BOX.w} height={BOX.h} rx="8" fill={url('air')} />}
 
       <g clipPath={url('clip')}>
-        {/* 자갈(육지) */}
-        <path d={landPath} fill={url('land')} stroke="#5c4422" strokeWidth="1.5" strokeLinejoin="round" />
+        {/* 자갈(육지): 그림이 없을 때만 코드로 */}
+        {!art && <path d={landPath} fill={url('land')} stroke="#5c4422" strokeWidth="1.5" strokeLinejoin="round" />}
         {/* 경사면 윗선의 밝은 띠 */}
-        <path d={`M${SLOPE.x1} ${SLOPE.y1 - 1} L${SLOPE.x2} ${SLOPE.y2 - 1} L${BOX.x + BOX.w} ${SLOPE.y2 - 1}`} fill="none" stroke="#fff6dc" strokeWidth="3" strokeLinecap="round" opacity="0.8" />
-        {DOTS.map(([x, y, r], i) => (
+        {!art && <path d={`M${SLOPE.x1} ${SLOPE.y1 - 1} L${SLOPE.x2} ${SLOPE.y2 - 1} L${BOX.x + BOX.w} ${SLOPE.y2 - 1}`} fill="none" stroke="#fff6dc" strokeWidth="3" strokeLinecap="round" opacity="0.8" />}
+        {!art && DOTS.map(([x, y, r], i) => (
           <g key={i}>
             <circle cx={x} cy={y} r={r} fill={i % 4 === 0 ? '#8f7140' : '#a98b55'} />
             <circle cx={x - r * 0.35} cy={y - r * 0.35} r={r * 0.4} fill="#f3e3b8" opacity="0.7" />
@@ -225,7 +230,11 @@ export function TankSvg({ cups, animate = false, onModel, viewBox, stickers = []
         );
       })}
 
-      {/* 아크릴 상자: 두께감 있는 테두리 + 유리 반사광 */}
+      {/* 아크릴 상자: 두께감 있는 테두리 + 유리 반사광 (그림이 있으면 끌 때 강조선만) */}
+      {art ? (
+        dropActive && <rect x={BOX.x} y={BOX.y} width={BOX.w} height={BOX.h} rx="8" fill="none" stroke="var(--c-ink)" strokeWidth="6" />
+      ) : (
+      <>
       <rect x={BOX.x - 3} y={BOX.y - 3} width={BOX.w + 6} height={BOX.h + 6} rx="11" fill="none" stroke="#cfe6f6" strokeWidth="6" opacity="0.8" />
       <rect x={BOX.x} y={BOX.y} width={BOX.w} height={BOX.h} rx="8" fill="none" stroke={dropActive ? 'var(--c-ink)' : '#1f2a44'} strokeWidth={dropActive ? 6 : 2.5} />
       <g fill="#ffffff" opacity="0.55" pointerEvents="none">
@@ -233,6 +242,8 @@ export function TankSvg({ cups, animate = false, onModel, viewBox, stickers = []
         <path d={`M${BOX.x + 34} ${BOX.y + 8} L${BOX.x + 40} ${BOX.y + 8} L${BOX.x + 22} ${BOX.bottom - 10} L${BOX.x + 18} ${BOX.bottom - 10} Z`} opacity="0.6" />
         <rect x={BOX.x + 60} y={BOX.y + 4} width={BOX.w - 120} height="5" rx="2.5" opacity="0.7" />
       </g>
+      </>
+      )}
     </svg>
   );
 }

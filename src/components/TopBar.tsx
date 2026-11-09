@@ -155,5 +155,5 @@ export function TopBar({ tab, onTab, large, onToggleLarge, onMenu, onResearcher 
 /** 상단 바의 작은 연구 동료 스티커 */
 function ResearcherAvatar({ avatarId }: { avatarId: string | null }) {
   const a = game.avatars.find((x) => x.id === avatarId) ?? game.avatars[0];
-  return <GameSticker icon={a.icon} color={a.color} size={1.75} />;
+  return <GameSticker icon={a.icon} color={a.color} size={1.75} image={a.image} />;
 }

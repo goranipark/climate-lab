@@ -202,3 +202,6 @@ html[data-size="large"] .lab-split, html[data-size="large"] .exp { grid-template
 html[data-size="large"] .exp-stage { grid-template-columns: minmax(0, 1fr) 4.25rem; }
 html[data-size="large"] .state-pill { height: 2rem; }
 .summary-share { margin-top: 0; }
+
+/* 3D 컵 그림 (11/9) */
+.cup-img { display: block; width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 3px 3px rgba(31, 42, 68, 0.3)); pointer-events: none; }

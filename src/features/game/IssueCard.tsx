@@ -25,7 +25,7 @@ export function IssueCard() {
               className={`avatar-pick ${avatar === a.id ? 'avatar-on' : ''}`}
               onClick={() => setAvatar(a.id)}
             >
-              <GameSticker icon={a.icon} color={a.color} size={3.5} />
+              <GameSticker icon={a.icon} color={a.color} size={3.5} image={a.image} />
               <span>{a.label}</span>
             </button>
           ))}
