@@ -1,5 +1,5 @@
 // 2단계 디지털 실험: 붓기 전 관찰 → 컵 붓기 → 가까이 보고 관찰 → 이번 잔 기록 → 3잔까지 (concept.md 5.1)
-import { useEffect, useRef, useState, type PointerEvent as ReactPointerEvent } from 'react';
+import { useEffect, useRef, useState, type CSSProperties, type PointerEvent as ReactPointerEvent } from 'react';
 import { AlertCircle, Lock, NotebookPen, RotateCcw } from 'lucide-react';
 import { config, lab, type ModelId } from '../../../types/data';
 import { fill } from '../../../lib/template';
@@ -47,6 +47,8 @@ export function ExperimentStep({ onNext }: { onNext: () => void }) {
   const tankRef = useRef<HTMLDivElement>(null);
   const dragStart = useRef<{ x: number; y: number; moved: boolean } | null>(null);
   const timers = useRef<number[]>([]);
+  // 붓기 시작할 때의 잔 수 (물줄기 끝 높이를 붓기 전 물 표면에 고정)
+  const pourFrom = useRef<number | null>(null);
 
   const pourable = canPour(record) && phase === 'idle';
   const blockedByRecord = pourBlockedByRecord(record);
@@ -77,11 +79,13 @@ export function ExperimentStep({ onNext }: { onNext: () => void }) {
       finish();
       return;
     }
+    pourFrom.current = from;
     setPhase('tilt');
     timers.current.push(
       window.setTimeout(() => dispatch({ type: 'LAB_POUR' }), 400),
       window.setTimeout(() => setPhase('return'), 1600),
       window.setTimeout(() => {
+        pourFrom.current = null;
         setPhase('idle');
         finish();
       }, 2000),
@@ -126,9 +130,9 @@ export function ExperimentStep({ onNext }: { onNext: () => void }) {
     if (!s || !s.moved || wasOver) pour();
   }
 
-  // 수조 그림 크기에 맞춘 물줄기 위치 (컵 입구 → 물 표면)
+  // 수조 그림 크기에 맞춘 물줄기 길이 (컵 입구 → 붓기 전 물 표면). 물이 차오르면 끝이 물에 잠긴다
   const stageH = tankRef.current?.clientHeight ?? 283;
-  const surfacePx = (waterY(Math.min(3, cups)) / VIEW_H) * stageH;
+  const surfacePx = (waterY(Math.min(3, pourFrom.current ?? cups)) / VIEW_H) * stageH;
 
   return (
     <div className="exp">
@@ -172,9 +176,7 @@ export function ExperimentStep({ onNext }: { onNext: () => void }) {
               <CupSvg level={phase === 'idle' ? 1 : phase === 'tilt' ? 0.4 : 0} />
               {!pourable && phase === 'idle' && cups < 3 && <Lock aria-hidden size={18} className="cup-lock" />}
             </button>
-            {phase === 'tilt' && (
-              <span className="stream" style={{ height: `${Math.max(0, surfacePx - 70)}px` }} aria-hidden />
-            )}
+            {phase === 'tilt' && <PourStream surfacePx={surfacePx} />}
             {drag && <span className={`drop-hint ${drag.over ? 'drop-hint-on' : ''}`}>{lab.experiment.dropHint}</span>}
             {closeModel && <CloseUp model={closeModel} cups={cups} onClose={() => setCloseModel(null)} />}
           </div>
@@ -302,6 +304,32 @@ function PastRows({ current, onPick }: { current: CupKey | null; onPick: (cup: C
         );
       })}
     </div>
+  );
+}
+
+/** 기울인 컵 입구의 자리(rem, 수조 왼쪽 위 기준). lab.css의 .cup 위치·.cup-tilt와 맞춘 값 */
+const LIP_REM = { x: 9.75, y: 2.4 };
+
+/** 물줄기: 컵 입구에서 앞으로 휘어 나온 뒤 물 표면까지 떨어지고, 끝에서 물이 튄다 */
+function PourStream({ surfacePx }: { surfacePx: number }) {
+  const rem = parseFloat(getComputedStyle(document.documentElement).fontSize) || 16;
+  const h = Math.max(rem, surfacePx - LIP_REM.y * rem);
+  const out = 0.7 * rem; // 입구에서 앞으로 나가는 거리
+  const w = 0.5 * rem; // 물줄기 굵기
+  const dash = 0.9 * rem;
+  const path = `M0 0 C${out * 0.6} ${-0.15 * rem} ${out} ${0.25 * rem} ${out} ${1.2 * rem} L${out} ${h}`;
+  return (
+    <svg className="stream" width={out + rem} height={h + rem} viewBox={`0 0 ${out + rem} ${h + rem}`} aria-hidden>
+      <path className="stream-body" d={path} strokeWidth={w} />
+      <path
+        className="stream-flow"
+        d={path}
+        strokeWidth={w * 0.3}
+        strokeDasharray={`${dash * 0.2} ${dash * 0.8}`}
+        style={{ '--dash': `${dash}px` } as CSSProperties}
+      />
+      <ellipse className="stream-splash" cx={out} cy={h} rx={0.55 * rem} ry={0.18 * rem} />
+    </svg>
   );
 }
 
