@@ -8,6 +8,7 @@ import { noteId } from '../../store/reducer';
 import { collectedCardCounts } from '../../store/selectors';
 import { fill } from '../../lib/template';
 import { PadletShare } from '../../components/PadletShare';
+import { MissionChip } from '../game/Mission';
 import './cards.css';
 
 type Filter = 'all' | 'life' | 'env' | 'collected';
@@ -137,12 +138,13 @@ export function CardsTab() {
     <div className="cards-toolbar">
       <div className="cards-filters">{filters.map((item) => <button type="button" key={item.id} className={`chip ${filter === item.id ? 'chip-on' : ''}`} aria-pressed={filter === item.id} onClick={() => setFilter(item.id)}>{item.label}</button>)}</div>
       <p className="cards-progress" aria-live="polite">{fill(data.labels.progress, counts)}</p>
+      <MissionChip id="cards" />
     </div>
     <div className="cards-grid">{visible.map((card) => <article key={card.id} className={`cards-tile cards-${card.area}`}>
-      <button type="button" className="cards-open" aria-label={card.title} aria-haspopup="dialog" onClick={() => setSelected(card)}>
-        <span className="cards-band">{card.area === 'env' ? <Leaf aria-hidden size={14} /> : card.area === 'local' ? <MapPin aria-hidden size={14} /> : <User aria-hidden size={14} />}{data.ui[card.area]}</span>
+      <button type="button" className="cards-open" aria-label={card.title} aria-describedby={`card-band-${card.id} card-q-${card.id}`} aria-haspopup="dialog" onClick={() => setSelected(card)}>
+        <span id={`card-band-${card.id}`} className="cards-band">{card.area === 'env' ? <Leaf aria-hidden size={14} /> : card.area === 'local' ? <MapPin aria-hidden size={14} /> : <User aria-hidden size={14} />}{data.ui[card.area]}</span>
         <CardImage card={card} />
-        <span className="cards-question">{'question' in card ? card.question : card.title}</span>
+        <span id={`card-q-${card.id}`} className="cards-question">{'question' in card ? card.question : card.title}</span>
         {collected(card) && <span className="cards-check" aria-label={data.labels.collectedLabel}><Check aria-hidden /></span>}
         {!record.cards.flipped.includes(card.id) && <span className="cards-unread" role="img" aria-label={data.ui.unread} />}
       </button>

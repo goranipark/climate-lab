@@ -11,6 +11,12 @@ export function readHash(): TabId | null {
   return tab && TABS.includes(tab) ? tab : null;
 }
 
+/** 주소의 해시를 기록의 탭으로 맞추거나 지운다 */
+export function syncHash(tab: TabId | null): void {
+  const url = tab ? `#/${tab}` : window.location.pathname + window.location.search;
+  window.history.replaceState(null, '', url);
+}
+
 export function useHashTab(fallback: TabId): [TabId, (tab: TabId) => void] {
   const [tab, setTabState] = useState<TabId>(() => readHash() ?? fallback);
 

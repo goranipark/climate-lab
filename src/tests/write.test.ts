@@ -2,7 +2,7 @@
 import { writing } from '../types/data';
 import { createEmptyRecord, type StudentRecord } from '../types/record';
 import { reducer, type Action } from '../store/reducer';
-import { composeText, insertAt, selfCheck, updateImports, type Fields } from '../features/write/writeLogic';
+import { composeParts, composeText, insertAt, selfCheck, updateImports, type Fields } from '../features/write/writeLogic';
 
 const empty: Fields = { life: '', env: '', exp: '', extra: '' };
 const run = (r: StudentRecord, ...a: Action[]) => a.reduce(reducer, r);
@@ -15,6 +15,11 @@ describe('완성 글', () => {
 
   it('빈 칸은 문장째 빠지고, 더 써 보기는 맨 뒤에 붙는다', () => {
     expect(composeText({ ...empty, env: '갯벌이 줄어요', extra: '폭염이 길어져요' })).toBe('또 갯벌이 줄어요. 그리고 폭염이 길어져요.');
+  });
+
+  it('인쇄용 조각은 칸별 영역 정보를 함께 돌려준다', () => {
+    const parts = composeParts({ ...empty, life: '집을 잃어요', env: '갯벌이 줄어요', exp: '섬이 먼저 잠겼다', extra: '폭염이 길어져요' });
+    expect(parts.map((p) => p.area)).toEqual(['life', 'env', 'exp', null]);
   });
 });
 

@@ -17,13 +17,26 @@ function tidy(text: string): string {
   return text.trim().replace(/[.!?。]$/, '').trim();
 }
 
+export interface ComposedPart {
+  id: FieldId;
+  area: WritingField['area'];
+  text: string;
+}
+
+/** 인쇄·미리보기용 문장 조각: 영역 라벨과 문장을 함께 돌려준다 */
+export function composeParts(fields: Fields): ComposedPart[] {
+  return ORDER.flatMap((id) => {
+    const t = tidy(fields[id] ?? '');
+    if (!t) return [];
+    const field = writing.fields.find((f) => f.id === id);
+    return [{ id, area: field?.area ?? null, text: writing.compose.sentenceTemplates[id].replace('{text}', t) }];
+  });
+}
+
 /** 완성 글: 칸마다 문장 틀에 끼우고, 빈 칸은 문장째 뺀다 */
 export function composeText(fields: Fields): string {
-  return ORDER.map((id) => {
-    const t = tidy(fields[id] ?? '');
-    return t ? writing.compose.sentenceTemplates[id].replace('{text}', t) : '';
-  })
-    .filter(Boolean)
+  return composeParts(fields)
+    .map((p) => p.text)
     .join(writing.compose.joiner);
 }
 

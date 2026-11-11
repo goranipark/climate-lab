@@ -80,7 +80,7 @@ climate-lab/
 │  ├─ data/                                    # json 5개 (완성됨)
 │  ├─ types/data.ts                            # json 구조 타입
 │  ├─ types/record.ts                          # 학생 기록 타입 (data.md 7장)
-│  ├─ styles/tokens.css  base.css  print.css
+│  ├─ styles/tokens.css  base.css  app.css
 │  ├─ store/
 │  │  ├─ RecordContext.tsx                     # 학생 기록 상태 + 저장
 │  │  ├─ reducer.ts                            # 기록 바꾸는 동작 모음
@@ -90,7 +90,6 @@ climate-lab/
 │  │  └─ migrate.ts                            # 기록 버전 바꾸기
 │  ├─ lib/
 │  │  ├─ template.ts                           # "{class}반" 같은 자리 채우기
-│  │  ├─ compose.ts                            # ⑦ 완성 글 만들기
 │  │  ├─ photo.ts                              # 사진 줄이기(긴 변 800px JPEG)
 │  │  └─ hashRoute.ts
 │  ├─ components/                              # 공용: TopBar, Tabs, Button, Pill, AreaTag, Toast, Modal, Stepper …
@@ -198,7 +197,7 @@ climate-lab/
 - [x] 몰디브(사람 없이)·빙하(얼음덩어리) 다시 생성해 교체 (11/9, `docs/image-prompts.md` 8장)
 - [x] (11/9) 배지·연구 동료·연구소장·수조·컵 그림 자리(json `image`/`art` 칸)와 프롬프트(`docs/image-prompts.md` 9·10장)
 - [x] (11/9) 배지 12·동료 6·연구소장 1·수조·컵 3D 그림 연결(WebP, `public/images/game/`·`lab/`). 수조 좌표를 그림에 맞추고 물 높이를 0.10·0.27·0.44·0.61로 조정(집 받침이 컵 1잔에 젖지 않게)
-- [ ] (M3 담당 참고) ④ 화면에 임무 표시를 넣고 싶으면 `src/features/game/Mission.tsx`의 `<MissionChip id="cards" />`를 쓴다. 브리핑은 App이 자동으로 띄운다
+- [x] (M3 담당 참고) ④ 화면에 임무 표시를 넣고 싶으면 `src/features/game/Mission.tsx`의 `<MissionChip id="cards" />`를 쓴다. 브리핑은 App이 자동으로 띄운다
 
 ### M3. ④ 영향 탐사 카드 (11/6~11/10) · 담당 GPT 6.1 (그림은 Codex) — concept.md 5.2, design.md 2.5·5.6·6.1, data.md 5장
 
@@ -246,7 +245,7 @@ climate-lab/
 - [x] 자기 점검(`selfCheck`): 공백 뺀 10자 기준, 빠진 항목만 문구, 모두 있으면 `allOkText`/`allOkWithExtraText`, 안 고친 문장 남으면 `unchangedImportText`. 점수 없음
 - [x] 완성 글 규칙(`features/write/writeLogic.ts`의 `composeText`) + 테스트(마침표 중복, 빈 칸 빼기)
 - [x] 인쇄(`write.css`의 `@media print`): A4 세로 1장, 글이 길면 11pt
-- [ ] 11pt로도 2쪽이 넘을 때 `printTooLong` 안내 (실제 학생 글 길이를 보고 필요하면)
+- [x] 11pt로도 2쪽이 넘을 때 `printTooLong` 안내 (실제 학생 글 길이를 보고 필요하면)
 - [x] 글 복사 → `PadletShare tag="write"`(우리 반 패들렛 번호 칸, 11/8 결정)
 - [x] 교사 모드에서만 `예시 글 보기`(`teacherExample`)
 - [x] ③ 정리 문장이 없으면 안내 줄(`noLabNotice`)

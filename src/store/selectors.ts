@@ -46,6 +46,14 @@ export function isCardCollected(record: StudentRecord, cardId: string): boolean 
 
 /** 마지막 내보내기 뒤에 바뀐 내용이 있는지 (메뉴의 ● 표시) */
 export function hasUnexported(record: StudentRecord): boolean {
-  if (!record.lastExportedAt) return record.notes.length > 0 || record.lab.predict.submitted;
+  if (!record.lastExportedAt) {
+    return (
+      record.notes.length > 0 ||
+      record.lab.predict.submitted ||
+      record.cards.flipped.length > 0 ||
+      record.cards.localText.trim().length > 0 ||
+      Object.values(record.writing.fields).some((v) => v.trim().length > 0)
+    );
+  }
   return record.updatedAt > record.lastExportedAt;
 }

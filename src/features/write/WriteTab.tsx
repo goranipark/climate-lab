@@ -1,15 +1,16 @@
 // ⑦ 서술 연습: 왼쪽 내 근거 노트, 오른쪽 서술 틀·자기 점검·인쇄·패들렛 (concept.md 5.3, design.md 2.6·6.3·8)
 import { useRef, useState, type ReactNode } from 'react';
 import { AlertCircle, Check, FileText, Plus, Printer } from 'lucide-react';
-import { writing } from '../../types/data';
+import { config, writing } from '../../types/data';
 import type { Note } from '../../types/record';
 import { fill } from '../../lib/template';
 import { useRecord } from '../../store/RecordContext';
 import { isTeacher } from '../../store/selectors';
 import { AreaTag } from '../../components/AreaTag';
+import { useFeedback } from '../../components/Feedback';
 import { Modal } from '../../components/Modal';
 import { PadletShare } from '../../components/PadletShare';
-import { composeText, hasLabSummary, selfCheck, suits, type FieldId, type ImportRange } from './writeLogic';
+import { composeParts, composeText, hasLabSummary, selfCheck, suits, type FieldId, type ImportRange } from './writeLogic';
 import './write.css';
 
 const U = writing.ui;
@@ -21,6 +22,7 @@ function noteArea(n: Note) {
 
 export function WriteTab() {
   const { record, dispatch } = useRecord();
+  const { toast } = useFeedback();
   const w = record.writing;
   const [selected, setSelected] = useState<FieldId>('life');
   const [showExtra, setShowExtra] = useState(w.fields.extra.trim().length > 0);
@@ -35,10 +37,17 @@ export function WriteTab() {
   const fieldLabel = (id: FieldId) => writing.fields.find((f) => f.id === id)?.label ?? id;
 
   function insert(n: Note) {
-    const pos = cursor.current[selected] ?? w.fields[selected].length;
+    const cur = w.fields[selected];
+    const pos = Math.max(0, Math.min(cursor.current[selected] ?? cur.length, cur.length));
+    const lead = pos > 0 && !/\s$/.test(cur.slice(0, pos)) ? 1 : 0;
     dispatch({ type: 'WRITE_INSERT_NOTE', fieldId: selected, pos, text: n.text, noteId: n.id });
-    cursor.current[selected] = pos + n.text.length + 1;
+    cursor.current[selected] = pos + lead + n.text.length;
     setChecked(false);
+  }
+
+  function handlePrint() {
+    if (composed.length > 1000) toast(writing.output.printTooLong);
+    window.print();
   }
 
   function runCheck() {
@@ -155,7 +164,7 @@ export function WriteTab() {
           <button type="button" className="btn btn-primary" onClick={runCheck}>
             <Check aria-hidden size={18} /> {writing.selfCheck.buttonLabel}
           </button>
-          <button type="button" className="btn btn-ghost" onClick={() => window.print()} disabled={!composed}>
+          <button type="button" className="btn btn-ghost" onClick={handlePrint} disabled={!composed}>
             <Printer aria-hidden size={18} /> {writing.output.printLabel}
           </button>
           {isTeacher(record) && (
@@ -232,6 +241,7 @@ function FieldBox(props: { id: FieldId; selected: boolean; onSelect: () => void;
 function PrintSheet({ composed }: { composed: string }) {
   const { record } = useRecord();
   const s = record.student;
+  const parts = composeParts(record.writing.fields);
   const check = selfCheck(record.writing.fields, record.writing.imports);
   const d = new Date();
   return (
@@ -243,7 +253,15 @@ function PrintSheet({ composed }: { composed: string }) {
           {U.dateLabel} {d.getFullYear()}. {d.getMonth() + 1}. {d.getDate()}.
         </span>
       </p>
-      <p className="ps-text">{composed}</p>
+      <p className="ps-text">
+        {parts.map((p, i) => (
+          <span key={p.id}>
+            {i > 0 ? writing.compose.joiner : ''}
+            {p.area && <span className="ps-tag">[{config.areas[p.area].label}]</span>}
+            {p.text}
+          </span>
+        ))}
+      </p>
       <div className="ps-check">
         <p className="ps-check-title">{U.checkTitle}</p>
         {writing.selfCheck.items.map((it) => (

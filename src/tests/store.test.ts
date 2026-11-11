@@ -111,6 +111,9 @@ describe('⑦ 잠금 조건', () => {
 describe('미저장 표시', () => {
   it('내보낸 뒤 바뀐 내용이 있을 때만 표시', () => {
     let r = createEmptyRecord(s23, '2026-11-16T00:00:00.000Z');
+    expect(hasUnexported(r)).toBe(false);
+    r = reducer(r, { type: 'CARDS_FLIP', cardId: 'flood' });
+    expect(hasUnexported(r)).toBe(true);
     r = reducer(r, { type: 'UPSERT_NOTE', note: cardNote('flood', 'life'), now: '2026-11-16T01:00:00.000Z' });
     expect(hasUnexported(r)).toBe(true);
     r = reducer(r, { type: 'MARK_EXPORTED', now: '2026-11-16T02:00:00.000Z' });

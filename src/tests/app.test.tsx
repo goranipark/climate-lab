@@ -55,4 +55,21 @@ describe('시작 화면', () => {
     expect(screen.getByRole('status')).toHaveTextContent(config.unlock.write.lockedMessage);
     expect(window.location.hash).not.toBe('#/write');
   });
+
+  it('학생을 바꾸면 이전 학생의 탭 해시가 초기화되어 새 학생의 기본 탭이 열린다', () => {
+    render(<App />);
+    startAs('3', '12', 'Kim');
+    issueCard();
+    fireEvent.click(screen.getByRole('button', { name: config.ui.tabs.cards }));
+    fireEvent.click(screen.getByRole('button', { name: game.ui.briefingStart }));
+    expect(window.location.hash).toBe('#/cards');
+
+    fireEvent.click(screen.getByRole('button', { name: config.ui.topbar.menu }));
+    fireEvent.click(screen.getByRole('menuitem', { name: config.ui.menu.switch }));
+    expect(window.location.hash).toBe('');
+
+    startAs('3', '15', 'Lee');
+    issueCard();
+    expect(window.location.hash).toBe('#/lab');
+  });
 });

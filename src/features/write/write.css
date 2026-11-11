@@ -77,17 +77,19 @@
 .print-sheet { display: none; }
 @media print {
   @page { size: A4 portrait; margin: 15mm; }
-  body { background: #fff; }
-  body * { visibility: hidden; }
-  .print-sheet, .print-sheet * { visibility: visible; }
+  html, body, #root, .app, .app-body, .content, .write {
+    height: auto !important; min-height: 0 !important; overflow: visible !important;
+    display: block !important; background: #fff !important; padding: 0 !important; margin: 0 !important;
+  }
+  .topbar, .notes, .write-notes, .write-main, .toast-zone, .modal-backdrop { display: none !important; }
   .print-sheet {
-    display: block; position: absolute; left: 0; right: 0; top: 0;
-    font-size: 12pt; line-height: 1.8; color: #000;
+    display: block; font-size: 12pt; line-height: 1.8; color: #000;
   }
   .print-sheet.is-long { font-size: 11pt; }
   .ps-head { font-size: 15pt; font-weight: 800; border-bottom: 1.5pt solid #000; padding-bottom: 4pt; margin-bottom: 8pt; }
   .ps-who { display: flex; justify-content: space-between; margin-bottom: 12pt; }
   .ps-text { white-space: pre-wrap; min-height: 120mm; padding: 8pt; border: 1pt solid #000; }
+  .ps-tag { display: inline-block; padding: 0 3pt; margin-right: 3pt; border: 1pt solid #000; font-size: 0.9em; font-weight: 700; line-height: 1.3; }
   .ps-check { margin-top: 10pt; }
   .ps-check-title { font-weight: 800; }
 }

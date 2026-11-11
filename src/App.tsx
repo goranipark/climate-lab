@@ -4,7 +4,7 @@ import { Lock } from 'lucide-react';
 import { cards, config, type TabId } from './types/data';
 import type { StudentRecord } from './types/record';
 import { fill } from './lib/template';
-import { useHashTab } from './lib/hashRoute';
+import { syncHash, useHashTab } from './lib/hashRoute';
 import { FeedbackProvider, useFeedback } from './components/Feedback';
 import { TopBar, type MenuAction } from './components/TopBar';
 import { ExportDialog, ImportDialog } from './components/RecordDialogs';
@@ -44,8 +44,14 @@ function Root() {
   }, [large]);
 
   function start(r: StudentRecord) {
+    syncHash(r.ui.tab);
     setRecord(r);
     setSession((n) => n + 1);
+  }
+
+  function signOut() {
+    syncHash(null);
+    setRecord(null);
   }
 
   if (!record) return <StartScreen onStart={start} />;
@@ -55,7 +61,7 @@ function Root() {
       <Main
         large={large}
         onToggleLarge={() => setLarge((v) => !v)}
-        onSignOut={() => setRecord(null)}
+        onSignOut={signOut}
         onReplace={(r) => {
           saveRecord(r);
           start(r);
